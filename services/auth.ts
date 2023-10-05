@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 export async function loginEmail(
   email: string,
@@ -16,5 +16,20 @@ export async function loginEmail(
     console.log(response.data);
   } catch (error) {
     return error;
+  }
+}
+
+export async function logoutUser() {
+  if (typeof window === "undefined") {
+    const { cookies } = await import("next/headers");
+    cookies().delete("userToken");
+  } else {
+    localStorage.removeItem("userToken");
+    const { data }: AxiosResponse<{ redirect?: string }> = await axios.get(
+      "/api/logout"
+    );
+    if (data.redirect) {
+      window.location.href = data.redirect;
+    }
   }
 }

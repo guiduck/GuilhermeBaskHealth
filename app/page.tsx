@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Image from "next/image";
 
 import { Button } from "@/components/ButtonNy";
 import {
@@ -14,25 +13,29 @@ import { MainNav } from "@/components/DashboardComponents/MainNav";
 import { Overview } from "@/components/DashboardComponents/Overview";
 import { UserNav } from "@/components/DashboardComponents/UserNav";
 import { RecentSales } from "@/components/DashboardComponents/RecentSales";
-import { ToggleMode } from "@/components/ToggleMode";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Dashboard",
   description: "User dashboard for data visualization.",
 };
 
+async function redirectUnlogged() {
+  const token = cookies().get("userToken");
+  if (!token) return redirect("/auth");
+  return true;
+}
 export default async function Home() {
+  await redirectUnlogged();
   return (
     <>
-      <div>
-        <div className="w-full h-16 bg-slate-50 dark:bg-[#020817]" />
-      </div>
+      <div className="w-full h-16 bg-slate-50 dark:bg-[#020817]" />
       <div className="hidden flex-col md:flex">
         <div className="border-b">
           <div className="flex h-16 items-center px-4">
             <MainNav className="mx-6" />
-            <div className="ml-auto flex items-center space-x-4">
-              <ToggleMode />
+            <div className="ml-auto">
               <UserNav />
             </div>
           </div>
