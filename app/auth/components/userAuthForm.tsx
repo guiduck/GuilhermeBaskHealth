@@ -7,92 +7,82 @@ import { Input } from "@/components/InputNy";
 import { Label } from "@/components/LabelNy";
 import { Button } from "@/components/ButtonNy";
 import { Icons } from "@/components/Icons";
-import { emailValidator } from "@/lib/validators/email";
-import { passwordValidator } from "@/lib/validators/password";
 import { loginEmail } from "@/services/auth";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { useTheme } from "next-themes";
+
+type LoginFormType = {
+  email: string;
+  password: string;
+};
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+  const router = useRouter();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const [email, setEmail] = React.useState<string>("");
-  const [emailError, setEmailError] = React.useState<string>("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormType>();
 
-  const [password, setPassword] = React.useState<string>("");
-  const [passwordError, setPasswordError] = React.useState<string>("");
-
-  const [formError, setFormError] = React.useState<string>("");
-
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
+  async function onLogin(data: LoginFormType) {
     setIsLoading(true);
-    const emailValidation = emailValidator(email);
-    const passwordValidation = passwordValidator(password);
+    const { email, password } = data;
     try {
-      if (emailValidation.error) {
-        setEmailError(emailValidation?.message as string);
-        setIsLoading(false);
-        return;
-      }
-      if (passwordValidation.error) {
-        setPasswordError(passwordValidation?.message as string);
-        setIsLoading(false);
-        return;
-      }
-
       const response = await loginEmail(email, password);
       console.log("response", response);
       if (response?.token) {
         localStorage.setItem("userToken", response?.token);
-
         setIsLoading(false);
-        setFormError("");
-        window.location.href = "/";
+        router.push("/");
       } else {
-        // TODO set snackbar error
         console.log("response error", response?.message);
         setIsLoading(false);
-        setFormError(response.message);
       }
     } catch (error) {
       console.log(error);
-      setFormError("An error occurred, please try again later.");
     } finally {
       setIsLoading(false);
     }
   }
-
+  console.log(errors);
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(onLogin)}>
         <div className="grid gap-2">
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="email">
               Email
             </Label>
             <Input
-              id="email"
               placeholder="name@example.com"
               type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
               disabled={isLoading}
+              {...register("email", {
+                required: "Required field",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Entered value does not match email format",
+                },
+              })}
             />
+            {errors.email && (
+              <p className="text-red-700">{errors.email.message}</p>
+            )}
             <Input
-              id="password"
               placeholder="******"
               type="password"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
               disabled={isLoading}
+              {...register("password", { required: "Required field" })}
             />
+            {errors.password && (
+              <p className="text-red-700">{errors.password?.message}</p>
+            )}
           </div>
           <Button disabled={isLoading}>
             {isLoading && (

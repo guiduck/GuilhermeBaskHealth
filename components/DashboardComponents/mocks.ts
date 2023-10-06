@@ -1,0 +1,146 @@
+export const dashboardDataMock = {
+  charts: {
+    salesOverTime: {
+      labels: [
+        "2023-10-06",
+        "2023-10-05",
+        "2023-10-04",
+        "2023-10-03",
+        "2023-10-02",
+        "2023-10-01",
+        "2023-09-30",
+        "2023-09-29",
+        "2023-09-28",
+        "2023-09-27",
+        "2023-09-26",
+        "2023-09-25",
+        "2023-09-24",
+        "2023-09-23",
+        "2023-09-22",
+        "2023-09-21",
+        "2023-09-20",
+        "2023-09-19",
+        "2023-09-18",
+        "2023-09-17",
+        "2023-09-16",
+        "2023-09-15",
+        "2023-09-14",
+        "2023-09-13",
+        "2023-09-12",
+        "2023-09-11",
+        "2023-09-10",
+        "2023-09-09",
+        "2023-09-08",
+        "2023-09-07",
+      ],
+
+      data: [
+        139, 98, 151, 101, 181, 115, 101, 126, 96, 189, 134, 101, 76, 189, 99,
+        90, 89, 60, 82, 147, 109, 182, 179, 52, 190, 110, 147, 123, 197, 166,
+      ],
+    },
+
+    userEngagement: {
+      labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+      data: [418, 500, 510, 541],
+    },
+  },
+
+  tables: {
+    recentTransactions: [
+      { id: 1, user: "John Doe", amount: "$105", date: "2023-09-28" },
+      { id: 2, user: "Jane Smith", amount: "$108", date: "2023-09-27" },
+      { id: 3, user: "Alice Johnson", amount: "$143", date: "2023-09-26" },
+      { id: 4, user: "Bob Williams", amount: "$147", date: "2023-09-25" },
+      { id: 5, user: "Charlie Brown", amount: "$113", date: "2023-09-24" },
+      { id: 6, user: "David Jones", amount: "$171", date: "2023-09-23" },
+      { id: 7, user: "Eva Green", amount: "$167", date: "2023-09-26" },
+      { id: 8, user: "Dwitik Ghosh", amount: "$174", date: "2023-09-26" },
+      {
+        id: 9,
+        user: "Michael Jackson",
+        amount: "$193",
+        date: "2023-09-26",
+      },
+      { id: 10, user: "Lucy Liu", amount: "$171", date: "2023-09-26" },
+    ],
+
+    topProducts: [
+      { id: "A1", name: "Product A", sales: 1000 },
+      { id: "B2", name: "Product B", sales: 930 },
+      { id: "C3", name: "Product C", sales: 1072 },
+      { id: "D4", name: "Product D", sales: 1076 },
+      { id: "E5", name: "Product E", sales: 1158 },
+      { id: "F6", name: "Product F", sales: 861 },
+      { id: "G7", name: "Product G", sales: 973 },
+      { id: "R2", name: "Product R", sales: 943 },
+      { id: "M2", name: "Product M2", sales: 1195 },
+      { id: "Q32", name: "Product Q32", sales: 1197 },
+    ],
+  },
+
+  map: {
+    locations: [
+      {
+        latitude: 40.7128,
+        longitude: -74.006,
+        label: "New York",
+        activity: 485,
+      },
+      {
+        latitude: 34.0522,
+        longitude: -118.2437,
+        label: "Los Angeles",
+        activity: 482,
+      },
+      {
+        latitude: 41.8781,
+        longitude: -87.6298,
+        label: "Chicago",
+        activity: 571,
+      },
+      {
+        latitude: 29.7604,
+        longitude: -95.3698,
+        label: "Houston",
+        activity: 427,
+      },
+      {
+        latitude: 33.4484,
+        longitude: -112.074,
+        label: "Phoenix",
+        activity: 567,
+      },
+      {
+        latitude: 37.7749,
+        longitude: -122.4194,
+        label: "San Francisco",
+        activity: 569,
+      },
+      {
+        latitude: 47.6062,
+        longitude: -122.3321,
+        label: "Seattle",
+        activity: 523,
+      },
+      {
+        latitude: 39.9526,
+        longitude: -75.1652,
+        label: "Philadelphia",
+        activity: 550,
+      },
+      {
+        latitude: 38.9072,
+        longitude: -77.0369,
+        label: "Washington D.C.",
+        activity: 440,
+      },
+      {
+        latitude: 25.7617,
+        longitude: -80.1918,
+        label: "Miami",
+        activity: 433,
+      },
+    ],
+  },
+};

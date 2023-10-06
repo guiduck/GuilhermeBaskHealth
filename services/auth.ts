@@ -1,11 +1,13 @@
 import axios, { AxiosResponse } from "axios";
+import api from "./api";
+import apiNext from "./apiNext";
 
 export async function loginEmail(
   email: string,
   password: string
 ): Promise<any> {
   try {
-    const response = await axios.post("/api/login", {
+    const response = await apiNext.post("/api/login", {
       email,
       password,
     });
