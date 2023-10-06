@@ -2,10 +2,9 @@ import "styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { redirect } from "next/navigation";
-import { isUserLogged } from "@/lib/utils";
-import { cookies } from "next/headers";
 import Navbar from "@/components/Navbar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,27 +29,19 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
 };
-
-async function getUser() {
-  const token = cookies().get("userToken");
-  console.log(token);
-  if (!token) return redirect("/auth");
-  return true;
-}
-
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  await getUser();
-
   return (
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system">
           <Navbar />
+          <ToastContainer theme="dark" />
           {children}
+          {/* <Footer /> */}
         </ThemeProvider>
       </body>
     </html>
