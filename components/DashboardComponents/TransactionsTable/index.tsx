@@ -13,7 +13,7 @@ export async function TransactionsTable({
 }: {
   recentTransactions: RecentTransactionsType;
 }) {
-  const columns = Object.keys(recentTransactions[0]);
+  const columns = Object.keys(recentTransactions?.[0] || {});
 
   return (
     <div className="max-h-[400px] overflow-y-scroll">
@@ -34,7 +34,7 @@ export async function TransactionsTable({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {recentTransactions.length > 0 &&
+          {recentTransactions?.length > 0 &&
             recentTransactions.map((transaction) => (
               <TableRow key={transaction.id}>
                 <TableCell className="font-medium">{transaction.id}</TableCell>

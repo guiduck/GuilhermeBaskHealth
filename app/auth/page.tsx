@@ -5,7 +5,7 @@ import { UserAuthForm } from "./components/userAuthForm";
 
 export const metadata: Metadata = {
   title: "Authentication",
-  description: "Authentication forms built using the components.",
+  description: "Authentication form for Bask Health.",
 };
 
 export default async function AuthenticationPage() {

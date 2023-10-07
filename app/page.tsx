@@ -3,19 +3,12 @@ import { MainNav } from "@/components/DashboardComponents/MainNav";
 import { UserNav } from "@/components/DashboardComponents/UserNav";
 import api from "@/services/api";
 import { Metadata } from "next";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 import { Suspense, cache } from "react";
 
 export const metadata: Metadata = {
   title: "Dashboard",
   description: "User dashboard for data visualization.",
-};
-
-const checkAuth = () => {
-  const cookieStore = cookies();
-  return !!cookieStore.get("userToken")?.value;
 };
 
 export const revalidate = 5; //revalidate every 5 seconds
@@ -37,7 +30,6 @@ const getUserData = cache(async () => {
 
 export default async function Home() {
   // const awaiting = await new Promise((resolve) => setTimeout(resolve, 5000));
-  if (!checkAuth()) redirect("/auth");
   const dashboardData = await getUserData();
   return (
     <>
@@ -52,7 +44,7 @@ export default async function Home() {
           </div>
         </div>
         <Suspense fallback={<div>Loading...</div>}>
-          {<Dashboard dashboardData={dashboardData} />}
+          <Dashboard dashboardData={dashboardData} />
         </Suspense>
       </div>
     </>
