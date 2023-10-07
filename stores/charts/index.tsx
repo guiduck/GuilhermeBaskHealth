@@ -3,9 +3,11 @@ import { create } from "zustand";
 interface StoreProps {
   salesOverTime: boolean;
   userEngagement: boolean;
+  setSales: () => void;
+  setEngagement: () => void;
 }
 
-const useDashboardStore = create<StoreProps>((set) => ({
+export const useChartStore = create<StoreProps>((set) => ({
   salesOverTime: true,
   userEngagement: true,
   setSales: () => set((state) => ({ salesOverTime: !state.salesOverTime })),

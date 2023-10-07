@@ -1,9 +1,19 @@
-/**
- * TODO: add widget display control
- */
+import { create } from "zustand";
 
-// import { create } from "zustand";
+interface StoreProps {
+  displayItems: string[];
+  setDisplayItems: (items: string[]) => void;
+}
 
-// const useWidgets = create((set) => ({
+const defaultWdgetState = [
+  "recentTransactions",
+  "salesOverTime",
+  "userEngagement",
+  "topProducts",
+  "map",
+];
 
-// }))
+export const useWidgetsStore = create<StoreProps>((set) => ({
+  displayItems: defaultWdgetState,
+  setDisplayItems: (items: string[]) => set(() => ({ displayItems: items })),
+}));
