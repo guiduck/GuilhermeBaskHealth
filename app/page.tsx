@@ -6,8 +6,7 @@ import { Metadata } from "next";
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { Suspense, cache } from "react";
-import Loading from "./loading";
+import { cache } from "react";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -38,7 +37,7 @@ export const getUserData = cache(async () => {
 });
 
 export default async function Home() {
-  // const awaiting = await new Promise((resolve) => setTimeout(resolve, 5000));
+  const awaiting = await new Promise((resolve) => setTimeout(resolve, 5000));
   const dashboardData = await getUserData();
   return (
     <>
@@ -52,9 +51,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <Suspense fallback={<Loading />}>
-          <Dashboard dashboardData={dashboardData} />
-        </Suspense>
+        <Dashboard dashboardData={dashboardData} />
       </div>
     </>
   );

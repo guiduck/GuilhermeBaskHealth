@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table";
 import { RecentTransactionsType } from "../types";
 
-export async function SalesTable({
+export async function TransactionsTable({
   recentTransactions,
 }: {
   recentTransactions: RecentTransactionsType;

@@ -14,16 +14,20 @@ import { ChartBar } from "./ChartBar";
 import { DashbaordDataType } from "./types";
 import { ChartLine } from "./ChartLine";
 import { ProductsTable } from "./ProductsTable";
-import { SalesTable } from "./SalesTable";
 import { TableCaption } from "../ui/table";
 import { useWidgetsStore } from "@/stores/widgets";
+import { TransactionsTable } from "./TransactionsTable";
+import { CardSkeleton } from "../Skeleton/cardSkeleton";
+import { Suspense } from "react";
+import { Skeleton } from "../ui/skeleton";
 
-export default async function Dashboard({
+export default function Dashboard({
   dashboardData,
 }: {
   dashboardData: DashbaordDataType;
 }) {
   const { displayItems } = useWidgetsStore();
+  console.log(displayItems);
 
   return (
     <div className="flex-1 space-y-4 p-8 pt-6">
@@ -165,77 +169,86 @@ export default async function Dashboard({
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-            {displayItems.includes("salesOverTime") && (
-              <Card className="col-span-4">
-                <CardHeader>
-                  <CardTitle>Sales over time</CardTitle>
-                </CardHeader>
-                <CardContent className="pl-2 ">
-                  <ChartBar sales={dashboardData?.charts?.salesOverTime} />
-                </CardContent>
-              </Card>
-            )}
+            <Suspense fallback={<Skeleton className="col-span-4" />}>
+              {displayItems.includes("salesOverTime") && (
+                <Card className="col-span-4">
+                  <CardHeader>
+                    <CardTitle>Sales over time</CardTitle>
+                  </CardHeader>
+                  <CardContent className="pl-2 ">
+                    <ChartBar sales={dashboardData?.charts?.salesOverTime} />
+                  </CardContent>
+                </Card>
+              )}
+            </Suspense>
 
-            {displayItems.includes("recentTransactions") && (
-              <Card className="col-span-3">
-                <CardHeader>
-                  <CardTitle>Recent Transactions</CardTitle>
-                  <CardDescription>
-                    You traded $
-                    {dashboardData?.tables?.recentTransactions?.reduce(
-                      (total, transaction) =>
-                        total + parseInt(transaction.amount.slice(1)),
-                      0
-                    )}{" "}
-                    this month.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <SalesTable
-                    recentTransactions={
-                      dashboardData?.tables?.recentTransactions
-                    }
-                  />
-                  <TableCaption className="flex w-full">
-                    A list of your recent transactions.
-                  </TableCaption>
-                </CardContent>
-              </Card>
-            )}
+            <Suspense fallback={<Skeleton className="col-span-3" />}>
+              {displayItems.includes("recentTransactions") && (
+                <Card className="col-span-3">
+                  <CardHeader>
+                    <CardTitle>Recent Transactions</CardTitle>
+                    <CardDescription>
+                      You traded $
+                      {dashboardData?.tables?.recentTransactions?.reduce(
+                        (total, transaction) =>
+                          total + parseInt(transaction.amount.slice(1)),
+                        0
+                      )}{" "}
+                      this month.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <TransactionsTable
+                      recentTransactions={
+                        dashboardData?.tables?.recentTransactions
+                      }
+                    />
+                    <TableCaption className="flex w-full">
+                      A list of your recent transactions.
+                    </TableCaption>
+                  </CardContent>
+                </Card>
+              )}
+            </Suspense>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-            {displayItems.includes("userEngagement") && (
-              <Card className="col-span-4">
-                <CardHeader>
-                  <CardTitle>User Engagement</CardTitle>
-                </CardHeader>
-                <CardContent className="pl-2">
-                  <ChartLine
-                    userEngagement={dashboardData?.charts?.userEngagement}
-                  />
-                </CardContent>
-              </Card>
-            )}
-            {displayItems.includes("topProducts") && (
-              <Card className="col-span-3">
-                <CardHeader>
-                  <CardTitle>Top Products</CardTitle>
-                  <CardDescription>
-                    {dashboardData?.tables?.topProducts?.reduce(
-                      (total, product) => total + product.sales,
-                      0
-                    )}{" "}
-                    sales this month.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ProductsTable
-                    topProducts={dashboardData?.tables?.topProducts}
-                  />
-                </CardContent>
-              </Card>
-            )}
+            <Suspense fallback={<Skeleton className="col-span-4" />}>
+              {displayItems.includes("userEngagement") && (
+                <Card className="col-span-4">
+                  <CardHeader>
+                    <CardTitle>User Engagement</CardTitle>
+                  </CardHeader>
+                  <CardContent className="pl-2">
+                    <ChartLine
+                      userEngagement={dashboardData?.charts?.userEngagement}
+                    />
+                  </CardContent>
+                </Card>
+              )}
+            </Suspense>
+
+            <Suspense fallback={<Skeleton className="col-span-3" />}>
+              {displayItems.includes("topProducts") && (
+                <Card className="col-span-3">
+                  <CardHeader>
+                    <CardTitle>Top Products</CardTitle>
+                    <CardDescription>
+                      {dashboardData?.tables?.topProducts?.reduce(
+                        (total, product) => total + product.sales,
+                        0
+                      )}{" "}
+                      sales this month.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ProductsTable
+                      topProducts={dashboardData?.tables?.topProducts}
+                    />
+                  </CardContent>
+                </Card>
+              )}
+            </Suspense>
           </div>
         </TabsContent>
       </Tabs>

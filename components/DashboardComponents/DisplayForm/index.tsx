@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Checkbox } from "@/components/Checkbox";
@@ -13,8 +13,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/Form";
-import { toast } from "@/components/Toast/useToast";
 import { useWidgetsStore } from "@/stores/widgets";
+import { setWidgetCookie } from "@/lib/utils";
 
 const displayFormSchema = z.object({
   items: z.array(z.string()).refine((value) => value.some((item) => item), {
@@ -44,15 +44,7 @@ export function DisplayForm({ items, displayLabel }: DisplayFormProps) {
   function onSubmit(data: DisplayFormValues) {
     const { items } = data;
     setDisplayItems(items);
-
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+    setWidgetCookie(items);
   }
 
   return (

@@ -5,7 +5,7 @@ interface StoreProps {
   setDisplayItems: (items: string[]) => void;
 }
 
-const defaultWdgetState = [
+export const defaultWdgetState = [
   "recentTransactions",
   "salesOverTime",
   "userEngagement",
