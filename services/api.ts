@@ -1,11 +1,9 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL,
-  isServer = typeof window === "undefined";
+const isServer = typeof window === "undefined";
 
 export const api = axios.create({
-  baseURL,
   headers: {
     "Content-Type": "application/json",
   },
@@ -22,7 +20,7 @@ api.interceptors.request.use(async (config) => {
     const { cookies } = await import("next/headers");
     const token = cookies().get("userToken");
     if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
+      config.headers["Authorization"] = `Bearer ${token.value}`;
     }
   }
 
