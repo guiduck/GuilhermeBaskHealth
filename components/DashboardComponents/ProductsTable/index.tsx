@@ -28,9 +28,10 @@ export async function ProductsTable({
 }) {
   return (
     <div className="space-y-8 max-h-[400px] overflow-y-scroll">
-      {topProducts?.map((tableRow) => (
-        <TableItem key={tableRow.id} tableItem={tableRow} />
-      ))}
+      {topProducts?.length > 0 &&
+        topProducts.map((tableRow) => (
+          <TableItem key={tableRow.id} tableItem={tableRow} />
+        ))}
     </div>
   );
 }

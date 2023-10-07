@@ -29,7 +29,7 @@ const getUserData = cache(async () => {
 });
 
 export default async function Home() {
-  const awaiting = await new Promise((resolve) => setTimeout(resolve, 5000));
+  // const awaiting = await new Promise((resolve) => setTimeout(resolve, 5000));
   const dashboardData = await getUserData();
   return (
     <>
@@ -43,7 +43,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <Dashboard dashboardData={dashboardData} />
+        {dashboardData && <Dashboard dashboardData={dashboardData} />}
       </div>
     </>
   );

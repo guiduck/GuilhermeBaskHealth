@@ -10,8 +10,6 @@ import { Icons } from "@/components/Icons";
 import { loginEmail } from "@/services/auth";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
-import { useTheme } from "next-themes";
 
 type LoginFormType = {
   email: string;
@@ -45,12 +43,12 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         setIsLoading(false);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
   }
-  console.log(errors);
+
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <form onSubmit={handleSubmit(onLogin)}>

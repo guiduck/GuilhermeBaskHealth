@@ -12,16 +12,15 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use(async (config) => {
-  if (isServer) {
-    const { cookies } = await import("next/headers"),
-      token = cookies().get("userToken")?.value;
+  if (!isServer) {
+    const token = localStorage.getItem("userToken");
 
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
   } else {
-    const token = localStorage.getItem("userToken");
-
+    const { cookies } = await import("next/headers");
+    const token = cookies().get("userToken");
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }

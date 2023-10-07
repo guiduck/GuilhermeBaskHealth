@@ -20,27 +20,29 @@ export async function TransactionsTable({
       <Table>
         <TableHeader>
           <TableRow>
-            {columns.map((tableHeader, index) => (
-              <TableHead
-                key={tableHeader}
-                className={`${index === 0 && "w-[50px]"} ${
-                  index === columns.length - 1 && "text-right m-r-5"
-                }`}
-              >
-                {tableHeader}
-              </TableHead>
-            ))}
+            {columns?.length > 0 &&
+              columns.map((tableHeader, index) => (
+                <TableHead
+                  key={tableHeader}
+                  className={`${index === 0 && "w-[50px]"} ${
+                    index === columns.length - 1 && "text-right m-r-5"
+                  }`}
+                >
+                  {tableHeader}
+                </TableHead>
+              ))}
           </TableRow>
         </TableHeader>
         <TableBody>
-          {recentTransactions.map((transaction) => (
-            <TableRow key={transaction.id}>
-              <TableCell className="font-medium">{transaction.id}</TableCell>
-              <TableCell>{transaction.user}</TableCell>
-              <TableCell>{transaction.amount}</TableCell>
-              <TableCell className="text-right">{transaction.date}</TableCell>
-            </TableRow>
-          ))}
+          {recentTransactions.length > 0 &&
+            recentTransactions.map((transaction) => (
+              <TableRow key={transaction.id}>
+                <TableCell className="font-medium">{transaction.id}</TableCell>
+                <TableCell>{transaction.user}</TableCell>
+                <TableCell>{transaction.amount}</TableCell>
+                <TableCell className="text-right">{transaction.date}</TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </div>

@@ -1,5 +1,4 @@
-import axios, { AxiosResponse } from "axios";
-import api from "./api";
+import { AxiosResponse } from "axios";
 import apiNext from "./apiNext";
 
 export async function loginEmail(
@@ -27,7 +26,7 @@ export async function logoutUser() {
     cookies().delete("userToken");
   } else {
     localStorage.removeItem("userToken");
-    const { data }: AxiosResponse<{ redirect?: string }> = await axios.get(
+    const { data }: AxiosResponse<{ redirect?: string }> = await apiNext.get(
       "/api/logout"
     );
     if (data.redirect) {

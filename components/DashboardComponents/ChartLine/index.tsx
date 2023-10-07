@@ -22,7 +22,7 @@ export async function ChartLine({
       userEngagement?.labels?.map((l, index) => ({
         name: l,
         uv: userEngagement?.data[index],
-      })),
+      })) || [],
     [userEngagement]
   );
 

@@ -14,7 +14,6 @@ import {
   FormMessage,
 } from "@/components/Form";
 import { useWidgetsStore } from "@/stores/widgets";
-import { setWidgetCookie } from "@/lib/utils";
 
 const displayFormSchema = z.object({
   items: z.array(z.string()).refine((value) => value.some((item) => item), {
@@ -44,7 +43,6 @@ export function DisplayForm({ items, displayLabel }: DisplayFormProps) {
   function onSubmit(data: DisplayFormValues) {
     const { items } = data;
     setDisplayItems(items);
-    setWidgetCookie(items);
   }
 
   return (

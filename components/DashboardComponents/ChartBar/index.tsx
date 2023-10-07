@@ -10,7 +10,7 @@ export async function ChartBar({ sales }: { sales: ChartType }) {
       sales?.labels?.map((l, index) => ({
         name: l,
         total: sales?.data[index],
-      })),
+      })) || [],
     [sales]
   );
 
