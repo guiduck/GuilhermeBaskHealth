@@ -21,7 +21,7 @@ async function redirectUnlogged() {
   return true;
 }
 
-export const getUserData = cache(async () => {
+const getUserData = cache(async () => {
   const path = `${process.env.NEXT_PUBLIC_API_URL}/api/get`;
   try {
     const { data } = await api.get(path);
