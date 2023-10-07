@@ -1,19 +1,15 @@
 "use client";
 
-import { useSalesStore } from "@/stores/salesOverTime";
 import { useMemo } from "react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
+import { ChartType } from "../types";
 
-export async function ChartBar() {
-  const {
-    state: { labels, data },
-  } = useSalesStore();
-
+export async function ChartBar({ sales }: { sales: ChartType }) {
   const chartData = useMemo(
-    () => labels.map((l, index) => ({ name: l, total: data[index] })),
-    [labels, data]
+    () =>
+      sales.labels.map((l, index) => ({ name: l, total: sales.data[index] })),
+    [sales]
   );
-  console.log("sales over time chart: ", chartData);
 
   return (
     <ResponsiveContainer width="100%" height={350}>

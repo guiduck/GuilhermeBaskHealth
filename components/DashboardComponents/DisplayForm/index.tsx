@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { Checkbox } from "@/components/Checkbox";
@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/Form";
 import { toast } from "@/components/Toast/useToast";
+import { useWidgetsStore } from "@/stores/widgets";
 
 const displayFormSchema = z.object({
   items: z.array(z.string()).refine((value) => value.some((item) => item), {
@@ -22,11 +23,6 @@ const displayFormSchema = z.object({
 });
 
 type DisplayFormValues = z.infer<typeof displayFormSchema>;
-
-// This can come from your database or API.
-const defaultValues: Partial<DisplayFormValues> = {
-  items: ["recents", "home"],
-};
 
 type Item = {
   id: string;
@@ -41,10 +37,14 @@ interface DisplayFormProps {
 export function DisplayForm({ items, displayLabel }: DisplayFormProps) {
   const form = useForm<DisplayFormValues>({
     resolver: zodResolver(displayFormSchema),
-    defaultValues,
   });
 
+  const { setDisplayItems, displayItems } = useWidgetsStore();
+
   function onSubmit(data: DisplayFormValues) {
+    const { items } = data;
+    setDisplayItems(items);
+
     toast({
       title: "You submitted the following values:",
       description: (
@@ -62,7 +62,7 @@ export function DisplayForm({ items, displayLabel }: DisplayFormProps) {
           control={form.control}
           name="items"
           render={() => (
-            <FormItem>
+            <FormItem className="flex gap-6">
               <div className="mb-4">
                 <FormLabel className="text-base">
                   {displayLabel ?? "Summary"}
@@ -72,7 +72,7 @@ export function DisplayForm({ items, displayLabel }: DisplayFormProps) {
                 <FormField
                   key={item.id}
                   control={form.control}
-                  name="items"
+                  name={"items"}
                   render={({ field }) => {
                     return (
                       <FormItem
@@ -81,15 +81,22 @@ export function DisplayForm({ items, displayLabel }: DisplayFormProps) {
                       >
                         <FormControl>
                           <Checkbox
-                            checked={field.value?.includes(item.id)}
+                            type="submit"
+                            checked={displayItems.includes(item.id)}
                             onCheckedChange={(checked) => {
-                              return checked
-                                ? field.onChange([...field.value, item.id])
-                                : field.onChange(
-                                    field.value?.filter(
+                              if (Array.isArray(field.value)) {
+                                if (checked) {
+                                  field.onChange([...field.value, item.id]);
+                                } else {
+                                  field.onChange(
+                                    field.value.filter(
                                       (value) => value !== item.id
                                     )
                                   );
+                                }
+                              } else {
+                                field.onChange([item.id]);
+                              }
                             }}
                           />
                         </FormControl>

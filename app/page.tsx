@@ -24,11 +24,10 @@ async function redirectUnlogged() {
 
 export const getUserData = cache(async () => {
   const path = `${process.env.NEXT_PUBLIC_API_URL}/api/get`;
-  console.log(process.env.NEXT_PUBLIC_API_URL);
   try {
     const { data } = await api.get(path);
-    console.log(data);
     if (data.success) {
+      console.log(data);
       return data.data.dashboardData;
     } else {
       console.log(data.secretMessage);

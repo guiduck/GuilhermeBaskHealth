@@ -8,33 +8,22 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/DashboardComponents/Card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs";
-import { RecentSales } from "@/components/DashboardComponents/RecentSales";
+import { Tabs, TabsContent } from "@/components/Tabs";
 import { DisplayForm } from "@/components/DashboardComponents/DisplayForm";
-import { useSalesStore } from "@/stores/salesOverTime";
-import { useEffect } from "react";
 import { ChartBar } from "./ChartBar";
 import { DashbaordDataType } from "./types";
 import { ChartLine } from "./ChartLine";
-import { useUserEngagementStore } from "@/stores/userEngagement";
+import { ProductsTable } from "./ProductsTable";
+import { SalesTable } from "./SalesTable";
+import { TableCaption } from "../ui/table";
+import { useWidgetsStore } from "@/stores/widgets";
 
 export default async function Dashboard({
   dashboardData,
 }: {
   dashboardData: DashbaordDataType;
 }) {
-  console.log(dashboardData);
-  const {
-    actions: { setSales },
-  } = useSalesStore();
-  const {
-    actions: { setUserEngagement },
-  } = useUserEngagementStore();
-
-  useEffect(() => {
-    setSales(dashboardData?.charts?.salesOverTime);
-    setUserEngagement(dashboardData?.charts?.userEngagement);
-  }, [dashboardData]);
+  const { displayItems } = useWidgetsStore();
 
   return (
     <div className="flex-1 space-y-4 p-8 pt-6">
@@ -46,40 +35,30 @@ export default async function Dashboard({
           </p>
           <div className="flex gap-12">
             <DisplayForm
-              displayLabel="Charts"
+              displayLabel="Widgets"
               items={[
-                { id: "salesOverTime", label: "sales over time" },
-                { id: "userEngagement", label: "user engagement" },
-              ]}
-            />
-            <DisplayForm
-              displayLabel="Tables"
-              items={[
-                { id: "recentTransactions", label: "recent transactions" },
+                {
+                  id: "salesOverTime",
+                  label: "sales over time",
+                },
+                {
+                  id: "userEngagement",
+                  label: "user engagement",
+                },
+                {
+                  id: "recentTransactions",
+                  label: "recent transactions",
+                },
                 { id: "topProducts", label: "top products" },
+                { id: "map", label: "map" },
               ]}
-            />
-            <DisplayForm
-              displayLabel="World Map"
-              items={[{ id: "map", label: "map" }]}
             />
           </div>
         </div>
         <Button>Edit workspace</Button>
       </div>
+
       <Tabs defaultValue="salesOverTime" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="salesOverTime">Sales over time</TabsTrigger>
-          <TabsTrigger value="analytics" disabled>
-            Analytics
-          </TabsTrigger>
-          <TabsTrigger value="reports" disabled>
-            Reports
-          </TabsTrigger>
-          <TabsTrigger value="notifications" disabled>
-            Notifications
-          </TabsTrigger>
-        </TabsList>
         <TabsContent value="salesOverTime" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card>
@@ -186,47 +165,77 @@ export default async function Dashboard({
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-            <Card className="col-span-4">
-              <CardHeader>
-                <CardTitle>Sales over time</CardTitle>
-              </CardHeader>
-              <CardContent className="pl-2">
-                <ChartBar />
-              </CardContent>
-            </Card>
-            <Card className="col-span-3">
-              <CardHeader>
-                <CardTitle>Recent Sales</CardTitle>
-                <CardDescription>
-                  You made 265 sales this month.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <RecentSales />
-              </CardContent>
-            </Card>
+            {displayItems.includes("salesOverTime") && (
+              <Card className="col-span-4">
+                <CardHeader>
+                  <CardTitle>Sales over time</CardTitle>
+                </CardHeader>
+                <CardContent className="pl-2 ">
+                  <ChartBar sales={dashboardData?.charts?.salesOverTime} />
+                </CardContent>
+              </Card>
+            )}
+
+            {displayItems.includes("recentTransactions") && (
+              <Card className="col-span-3">
+                <CardHeader>
+                  <CardTitle>Recent Transactions</CardTitle>
+                  <CardDescription>
+                    You traded $
+                    {dashboardData?.tables?.recentTransactions?.reduce(
+                      (total, transaction) =>
+                        total + parseInt(transaction.amount.slice(1)),
+                      0
+                    )}{" "}
+                    this month.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <SalesTable
+                    recentTransactions={
+                      dashboardData?.tables?.recentTransactions
+                    }
+                  />
+                  <TableCaption className="flex w-full">
+                    A list of your recent transactions.
+                  </TableCaption>
+                </CardContent>
+              </Card>
+            )}
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-            <Card className="col-span-4">
-              <CardHeader>
-                <CardTitle>User Engagement</CardTitle>
-              </CardHeader>
-              <CardContent className="pl-2">
-                <ChartLine />
-              </CardContent>
-            </Card>
-            <Card className="col-span-3">
-              <CardHeader>
-                <CardTitle>Recent Sales</CardTitle>
-                <CardDescription>
-                  You made 265 sales this month.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <RecentSales />
-              </CardContent>
-            </Card>
+            {displayItems.includes("userEngagement") && (
+              <Card className="col-span-4">
+                <CardHeader>
+                  <CardTitle>User Engagement</CardTitle>
+                </CardHeader>
+                <CardContent className="pl-2">
+                  <ChartLine
+                    userEngagement={dashboardData?.charts?.userEngagement}
+                  />
+                </CardContent>
+              </Card>
+            )}
+            {displayItems.includes("topProducts") && (
+              <Card className="col-span-3">
+                <CardHeader>
+                  <CardTitle>Top Products</CardTitle>
+                  <CardDescription>
+                    {dashboardData?.tables?.topProducts?.reduce(
+                      (total, product) => total + product.sales,
+                      0
+                    )}{" "}
+                    sales this month.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ProductsTable
+                    topProducts={dashboardData?.tables?.topProducts}
+                  />
+                </CardContent>
+              </Card>
+            )}
           </div>
         </TabsContent>
       </Tabs>
