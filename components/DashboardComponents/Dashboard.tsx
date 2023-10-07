@@ -17,7 +17,6 @@ import { ProductsTable } from "./ProductsTable";
 import { TableCaption } from "../ui/table";
 import { useWidgetsStore } from "@/stores/widgets";
 import { TransactionsTable } from "./TransactionsTable";
-import { CardSkeleton } from "../Skeleton/cardSkeleton";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 
@@ -170,7 +169,7 @@ export default function Dashboard({
 
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
             <Suspense fallback={<Skeleton className="col-span-4" />}>
-              {displayItems.includes("salesOverTime") && (
+              {displayItems?.includes("salesOverTime") && (
                 <Card className="col-span-4">
                   <CardHeader>
                     <CardTitle>Sales over time</CardTitle>
@@ -183,7 +182,7 @@ export default function Dashboard({
             </Suspense>
 
             <Suspense fallback={<Skeleton className="col-span-3" />}>
-              {displayItems.includes("recentTransactions") && (
+              {displayItems?.includes("recentTransactions") && (
                 <Card className="col-span-3">
                   <CardHeader>
                     <CardTitle>Recent Transactions</CardTitle>
@@ -191,7 +190,7 @@ export default function Dashboard({
                       You traded $
                       {dashboardData?.tables?.recentTransactions?.reduce(
                         (total, transaction) =>
-                          total + parseInt(transaction.amount.slice(1)),
+                          total + parseInt(transaction?.amount?.slice(1)),
                         0
                       )}{" "}
                       this month.
@@ -214,7 +213,7 @@ export default function Dashboard({
 
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
             <Suspense fallback={<Skeleton className="col-span-4" />}>
-              {displayItems.includes("userEngagement") && (
+              {displayItems?.includes("userEngagement") && (
                 <Card className="col-span-4">
                   <CardHeader>
                     <CardTitle>User Engagement</CardTitle>
@@ -229,13 +228,13 @@ export default function Dashboard({
             </Suspense>
 
             <Suspense fallback={<Skeleton className="col-span-3" />}>
-              {displayItems.includes("topProducts") && (
+              {displayItems?.includes("topProducts") && (
                 <Card className="col-span-3">
                   <CardHeader>
                     <CardTitle>Top Products</CardTitle>
                     <CardDescription>
                       {dashboardData?.tables?.topProducts?.reduce(
-                        (total, product) => total + product.sales,
+                        (total, product) => total + product?.sales,
                         0
                       )}{" "}
                       sales this month.

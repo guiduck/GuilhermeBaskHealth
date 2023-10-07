@@ -19,9 +19,9 @@ export async function ChartLine({
 }) {
   const chartData = useMemo(
     () =>
-      userEngagement.labels.map((l, index) => ({
+      userEngagement?.labels?.map((l, index) => ({
         name: l,
-        uv: userEngagement.data[index],
+        uv: userEngagement?.data[index],
       })),
     [userEngagement]
   );

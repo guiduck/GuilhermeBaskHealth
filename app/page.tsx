@@ -4,8 +4,6 @@ import { UserNav } from "@/components/DashboardComponents/UserNav";
 import api from "@/services/api";
 import { Metadata } from "next";
 
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { cache } from "react";
 
 export const metadata: Metadata = {
@@ -14,12 +12,6 @@ export const metadata: Metadata = {
 };
 
 export const revalidate = 5; //revalidate every 5 seconds
-
-async function redirectUnlogged() {
-  const token = cookies().get("userToken");
-  if (!token) return redirect("/auth");
-  return true;
-}
 
 const getUserData = cache(async () => {
   const path = `${process.env.NEXT_PUBLIC_API_URL}/api/get`;

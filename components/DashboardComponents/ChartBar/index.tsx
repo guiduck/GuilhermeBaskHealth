@@ -7,7 +7,10 @@ import { ChartType } from "../types";
 export async function ChartBar({ sales }: { sales: ChartType }) {
   const chartData = useMemo(
     () =>
-      sales.labels.map((l, index) => ({ name: l, total: sales.data[index] })),
+      sales?.labels?.map((l, index) => ({
+        name: l,
+        total: sales?.data[index],
+      })),
     [sales]
   );
 
