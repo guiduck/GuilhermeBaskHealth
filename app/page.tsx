@@ -6,7 +6,7 @@ import { Metadata } from "next";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { cache } from "react";
+import { Suspense, cache } from "react";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -51,7 +51,9 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        {dashboardData && <Dashboard dashboardData={dashboardData} />}
+        <Suspense fallback={<div>Loading...</div>}>
+          {<Dashboard dashboardData={dashboardData} />}
+        </Suspense>
       </div>
     </>
   );

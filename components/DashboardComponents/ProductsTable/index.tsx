@@ -1,3 +1,5 @@
+"use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "../Avatar";
 import { TopProductsType } from "../types";
 
@@ -21,7 +23,7 @@ function TableItem({ tableItem }: { tableItem: TableItemProps }) {
   );
 }
 
-export async function ProductsTable({
+export function ProductsTable({
   topProducts,
 }: {
   topProducts: TopProductsType;
