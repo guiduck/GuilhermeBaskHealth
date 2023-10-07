@@ -9,7 +9,6 @@ import {
   CardTitle,
 } from "@/components/DashboardComponents/Card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/Tabs";
-import { RecentSales } from "@/components/DashboardComponents/RecentSales";
 import { DisplayForm } from "@/components/DashboardComponents/DisplayForm";
 import { useSalesStore } from "@/stores/salesOverTime";
 import { useEffect } from "react";
@@ -17,6 +16,9 @@ import { ChartBar } from "./ChartBar";
 import { DashbaordDataType } from "./types";
 import { ChartLine } from "./ChartLine";
 import { useUserEngagementStore } from "@/stores/userEngagement";
+import { ProductsTable } from "./ProductsTable";
+import { SalesTable } from "./SalesTable";
+import { TableCaption } from "../ui/table";
 
 export default async function Dashboard({
   dashboardData,
@@ -67,6 +69,7 @@ export default async function Dashboard({
         </div>
         <Button>Edit workspace</Button>
       </div>
+
       <Tabs defaultValue="salesOverTime" className="space-y-4">
         <TabsList>
           <TabsTrigger value="salesOverTime">Sales over time</TabsTrigger>
@@ -80,6 +83,7 @@ export default async function Dashboard({
             Notifications
           </TabsTrigger>
         </TabsList>
+
         <TabsContent value="salesOverTime" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card>
@@ -190,19 +194,30 @@ export default async function Dashboard({
               <CardHeader>
                 <CardTitle>Sales over time</CardTitle>
               </CardHeader>
-              <CardContent className="pl-2">
-                <ChartBar />
+              <CardContent className="pl-2 ">
+                <ChartBar sales={dashboardData?.charts?.salesOverTime} />
               </CardContent>
             </Card>
             <Card className="col-span-3">
               <CardHeader>
-                <CardTitle>Recent Sales</CardTitle>
+                <CardTitle>Recent Transactions</CardTitle>
                 <CardDescription>
-                  You made 265 sales this month.
+                  You traded $
+                  {dashboardData?.tables?.recentTransactions?.reduce(
+                    (total, transaction) =>
+                      total + parseInt(transaction.amount.slice(1)),
+                    0
+                  )}{" "}
+                  this month.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <RecentSales />
+                <SalesTable
+                  recentTransactions={dashboardData?.tables?.recentTransactions}
+                />
+                <TableCaption className="flex w-full">
+                  A list of your recent transactions.
+                </TableCaption>
               </CardContent>
             </Card>
           </div>
@@ -213,18 +228,26 @@ export default async function Dashboard({
                 <CardTitle>User Engagement</CardTitle>
               </CardHeader>
               <CardContent className="pl-2">
-                <ChartLine />
+                <ChartLine
+                  userEngagement={dashboardData?.charts?.userEngagement}
+                />
               </CardContent>
             </Card>
             <Card className="col-span-3">
               <CardHeader>
-                <CardTitle>Recent Sales</CardTitle>
+                <CardTitle>Top Products</CardTitle>
                 <CardDescription>
-                  You made 265 sales this month.
+                  {dashboardData?.tables?.topProducts?.reduce(
+                    (total, product) => total + product.sales,
+                    0
+                  )}{" "}
+                  sales this month.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <RecentSales />
+                <ProductsTable
+                  topProducts={dashboardData?.tables?.topProducts}
+                />
               </CardContent>
             </Card>
           </div>

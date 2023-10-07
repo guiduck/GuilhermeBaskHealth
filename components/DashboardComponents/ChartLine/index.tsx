@@ -1,12 +1,8 @@
 "use client";
 
-import { useUserEngagementStore } from "@/stores/userEngagement";
 import { useMemo } from "react";
 import {
-  Bar,
-  BarChart,
   CartesianGrid,
-  Legend,
   Line,
   LineChart,
   ResponsiveContainer,
@@ -14,17 +10,21 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { ChartType } from "../types";
 
-export async function ChartLine() {
-  const {
-    state: { labels, data },
-  } = useUserEngagementStore();
-
+export async function ChartLine({
+  userEngagement,
+}: {
+  userEngagement: ChartType;
+}) {
   const chartData = useMemo(
-    () => labels.map((l, index) => ({ name: l, uv: data[index] })),
-    [labels, data]
+    () =>
+      userEngagement.labels.map((l, index) => ({
+        name: l,
+        uv: userEngagement.data[index],
+      })),
+    [userEngagement]
   );
-  console.log("sales over time chart: ", chartData);
 
   return (
     <ResponsiveContainer width="100%" height={400}>
@@ -39,13 +39,13 @@ export async function ChartLine() {
           bottom: 0,
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
+        <CartesianGrid strokeDasharray="4 4" />
+        <XAxis dataKey="users" />
         <YAxis />
         <Tooltip />
         <Line
           connectNulls
-          type="monotone"
+          type="linear"
           dataKey="uv"
           stroke="#8884d8"
           fill="#8884d8"

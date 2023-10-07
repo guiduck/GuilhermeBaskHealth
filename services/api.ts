@@ -17,7 +17,6 @@ api.interceptors.request.use(async (config) => {
       token = cookies().get("userToken")?.value;
 
     if (token) {
-      console.log("has user token");
       config.headers["Authorization"] = `Bearer ${token}`;
     }
   } else {
@@ -36,8 +35,9 @@ api.interceptors.response.use(
     return response;
   },
   function (error) {
-    console.log(error.response.message);
-    toast.error("There was an error with your request :(");
+    if (!isServer) {
+      toast.error("There was an error with your request :(");
+    }
 
     return Promise.reject(error);
   }
