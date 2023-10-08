@@ -1,13 +1,13 @@
 import { Tabs, TabsContent } from "@/components/Tabs";
 import { DashbaordDataType } from "./types";
 import RecentTransactions from "../RecentTransactions";
-import DashboardHeader from "../DashboardHeader";
-import Summary from "./Summary";
+import DashboardHeader from "./RootComponents/DashboardHeader";
+import Summary from "./RootComponents/Summary";
 import { Icons } from "../Icons";
-import SalesOverTime from "./SalesOverTime";
-import UserEngagement from "./UserEngagement/inex";
-import TopProducts from "./TopProducts";
-import WorldMap from "./WorldMap";
+import SalesOverTime from "./RootComponents/SalesOverTime";
+import UserEngagement from "./RootComponents/UserEngagement/index";
+import TopProducts from "./RootComponents/TopProducts";
+import WorldMap from "./RootComponents/WorldMap";
 
 export default function Dashboard({
   dashboardData,
@@ -17,6 +17,7 @@ export default function Dashboard({
   return (
     <div className="flex-1 space-y-4 p-8 pt-6">
       <DashboardHeader />
+
       <Tabs defaultValue="salesOverTime" className="space-y-4">
         <TabsContent value="salesOverTime" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

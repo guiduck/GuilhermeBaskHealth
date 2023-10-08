@@ -6,9 +6,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { RecentTransactionsType } from "../types";
+import { RecentTransactionsType } from "../../types";
 
-export async function TransactionsTable({
+export function TransactionsTable({
   recentTransactions,
 }: {
   recentTransactions: RecentTransactionsType;

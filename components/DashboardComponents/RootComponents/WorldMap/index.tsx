@@ -1,8 +1,8 @@
 "use client";
 
 import { Skeleton } from "@/components/ui/skeleton";
-import { Card, CardHeader, CardTitle, CardContent } from "../Card";
-import { LocationsType } from "../types";
+import { Card, CardHeader, CardTitle, CardContent } from "../../Card";
+import { LocationsType } from "../../types";
 import { useWidgetsStore } from "@/src/stores/widgets";
 import dynamic from "next/dynamic";
 

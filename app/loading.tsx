@@ -1,12 +1,9 @@
-import { Button } from "@/components/ButtonNy";
 import {
   Card,
   CardHeader,
-  CardTitle,
   CardContent,
-  CardDescription,
 } from "@/components/DashboardComponents/Card";
-import DashboardHeader from "@/components/DashboardHeader";
+import { Icons } from "@/components/Icons";
 import { ToggleMode } from "@/components/ToggleMode";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -21,190 +18,122 @@ export default function Loading() {
           </div>
 
           {/* here starts dashboard */}
-
           <div className="flex-1 space-y-4 p-8 pt-6">
-            <DashboardHeader />
+            <div className="flex items-center justify-between space-y-2 opacity-80">
+              <div className="flex flex-col gap-12">
+                <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+                <div>
+                  <p className="text-[0.8rem] text-muted-foregrounds mb-4">
+                    Select the widgets you want to display in the Dashboard.
+                  </p>
+                  <div className="flex gap-12">
+                    <Skeleton className="grid gap-2 w-full h-[80px] lg:h-[40px] lg:w-[714px] grid-cols-3 lg:flex lg:gap-6" />
+                  </div>
+                </div>
+              </div>
+              <div className="self-baseline md:self-end pb-8">
+                <Skeleton className="w-[48px] h-[48px] rounded-full" />
+              </div>
+            </div>
+
+            {/* summary */}
 
             <div className="space-y-4">
               <div className="space-y-4">
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                      <CardTitle className="text-sm font-medium">
-                        Total Revenue
-                      </CardTitle>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        className="h-4 w-4 text-muted-foreground"
-                      >
-                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                      </svg>
+                      <Skeleton className="font-semibold leading-none tracking-tight">
+                        sales
+                      </Skeleton>
+                      <Icons.dollar />
                     </CardHeader>
-                    <CardContent>
-                      <div className="text-2xl font-bold">$45,231.89</div>
-                      <p className="text-xs text-muted-foreground">
-                        +20.1% from last month
-                      </p>
+                    <CardContent className="flex flex-col gap-2">
+                      <Skeleton className="h-8 w-full" />
+                      <Skeleton className="h-3 w-full" />
                     </CardContent>
                   </Card>
+
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                      <CardTitle className="text-sm font-medium">
-                        Subscriptions
-                      </CardTitle>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        className="h-4 w-4 text-muted-foreground"
-                      >
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                        <circle cx="9" cy="7" r="4" />
-                        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-                      </svg>
+                      <Skeleton className="font-semibold leading-none tracking-tight">
+                        Transactions
+                      </Skeleton>
+                      <Icons.wallet />
                     </CardHeader>
-                    <CardContent>
-                      <div className="text-2xl font-bold">+2350</div>
-                      <p className="text-xs text-muted-foreground">
-                        +180.1% from last month
-                      </p>
+                    <CardContent className="flex flex-col gap-2">
+                      <Skeleton className="h-8 w-full" />
+                      <Skeleton className="h-3 w-full" />
                     </CardContent>
                   </Card>
+
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                      <CardTitle className="text-sm font-medium">
-                        Sales
-                      </CardTitle>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        className="h-4 w-4 text-muted-foreground"
-                      >
-                        <rect width="20" height="14" x="2" y="5" rx="2" />
-                        <path d="M2 10h20" />
-                      </svg>
+                      <Skeleton className="font-semibold leading-none tracking-tight">
+                        Organic visits
+                      </Skeleton>
+                      <Icons.users />
                     </CardHeader>
-                    <CardContent>
-                      <div className="text-2xl font-bold">+12,234</div>
-                      <p className="text-xs text-muted-foreground">
-                        +19% from last month
-                      </p>
+                    <CardContent className="flex flex-col gap-2">
+                      <Skeleton className="h-8 w-full" />
+                      <Skeleton className="h-3 w-full" />
                     </CardContent>
                   </Card>
+
                   <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                      <CardTitle className="text-sm font-medium">
-                        Active Now
-                      </CardTitle>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        className="h-4 w-4 text-muted-foreground"
-                      >
-                        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                      </svg>
+                      <Skeleton className="font-semibold leading-none tracking-tight">
+                        Products
+                      </Skeleton>
+                      <Icons.chart />
                     </CardHeader>
-                    <CardContent>
-                      <div className="text-2xl font-bold">+573</div>
-                      <p className="text-xs text-muted-foreground">
-                        +201 since last hour
-                      </p>
+                    <CardContent className="flex flex-col gap-2">
+                      <Skeleton className="h-8 w-full" />
+                      <Skeleton className="h-3 w-full" />
                     </CardContent>
                   </Card>
                 </div>
-
+                {/* sales over time */}
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                  {
-                    /* displayItems?.includes("salesOverTime") && */ <Card className="col-span-4">
-                      <CardHeader>
-                        <CardTitle>Sales over time</CardTitle>
-                      </CardHeader>
-                      <CardContent className="pl-2 ">
-                        <Skeleton className="w-full h-[370px]" />
-                      </CardContent>
-                    </Card>
-                  }
-
-                  {/* <RecentTransactions dashboardData={dashboardData} /> */}
-
-                  {/* <Suspense fallback={<Skeleton className="col-span-3" />}>
-              {
-                displayItems?.includes("recentTransactions") && <Card className="col-span-3">
-                  <CardHeader>
-                    <CardTitle>Recent Transactions</CardTitle>
-                    <CardDescription>
-                      You traded $
-                      {dashboardData?.tables?.recentTransactions?.reduce(
-                        (total, transaction) =>
-                          total + parseInt(transaction?.amount?.slice(1)),
-                        0
-                      )}{" "}
-                      this month.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <TransactionsTable
-                      recentTransactions={
-                        dashboardData?.tables?.recentTransactions
-                      }
-                    />
-                    <TableCaption className="flex w-full">
-                      A list of your recent transactions.
-                    </TableCaption>
-                  </CardContent>
-                </Card>
-              }
-            </Suspense> */}
-                </div>
-
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-                  <Skeleton className="col-span-4">
+                  <Card className="col-span-6 md:col-span-4 overflow-x-auto">
                     <CardHeader>
-                      <CardTitle>User Engagement</CardTitle>
+                      <Skeleton className="h[16px] tracking-tight" />
                     </CardHeader>
-                    <CardContent className="pl-2">
-                      {/* <Skeleton className="w-full h-[370px]" /> */}
-                    </CardContent>
-                  </Skeleton>
-
-                  <Card className="col-span-3">
-                    <CardHeader>
-                      <CardTitle>Top Products</CardTitle>
-                    </CardHeader>
-                    <CardContent>
+                    <CardContent className="pl-2 ">
                       <Skeleton className="w-full h-[370px]" />
+                    </CardContent>
+                  </Card>
+
+                  {/* recent transactions */}
+                  <Card className="col-span-6 md:col-span-4 lg:col-span-3">
+                    <CardContent>
+                      <Skeleton className="h-[504px] mt-4 w-full" />
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+                  {/* user engagement  */}
+                  <Card className="col-span-6 md:col-span-4 overflow-x-auto">
+                    <CardContent className="pl-2">
+                      <Skeleton className="w-full mt-4 h-[468px]" />
+                    </CardContent>
+                  </Card>
+
+                  {/* top products */}
+                  <Card className="col-span-6 md:col-span-4 lg:col-span-3">
+                    <CardContent>
+                      <Skeleton className="w-full mt-4 h-[468px]" />
                     </CardContent>
                   </Card>
                 </div>
               </div>
             </div>
             <div className="grid gap-4 md:grid-cols-1 h-[600px]">
+              {/* world map */}
               <Card className="col-span-6">
-                <CardHeader>
-                  <CardTitle>Your Locations</CardTitle>
-                </CardHeader>
                 <CardContent className="pl-2 h-[600px]">
-                  <Skeleton className="w-full h-[370px]" />
+                  <Skeleton className="w-full mt-4 h-[552px]" />
                 </CardContent>
               </Card>
             </div>
