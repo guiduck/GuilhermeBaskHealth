@@ -1,9 +1,15 @@
 "use client";
 
-import GlobeScene from "@/src/scenes/Globe/globeScene";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardHeader, CardTitle, CardContent } from "../Card";
 import { LocationsType } from "../types";
 import { useWidgetsStore } from "@/src/stores/widgets";
+import dynamic from "next/dynamic";
+
+const GlobeScene = dynamic(() => import("@/src/scenes/Globe/globeScene"), {
+  loading: () => <Skeleton className="w-full h-[576px]" />,
+  ssr: false,
+});
 
 export default function WorldMap({ locations }: { locations: LocationsType }) {
   const { displayItems } = useWidgetsStore();
