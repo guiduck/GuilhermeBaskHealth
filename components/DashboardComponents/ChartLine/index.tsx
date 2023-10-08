@@ -16,8 +16,8 @@ export function ChartLine({ userEngagement }: { userEngagement: ChartType }) {
   const chartData = useMemo(
     () =>
       userEngagement?.labels?.map((l, index) => ({
-        name: l,
-        uv: userEngagement?.data[index],
+        week: l,
+        users: userEngagement?.data[index],
       })) || [],
     [userEngagement]
   );
@@ -35,16 +35,22 @@ export function ChartLine({ userEngagement }: { userEngagement: ChartType }) {
           bottom: 0,
         }}
       >
-        <CartesianGrid strokeDasharray="4 4" />
-        <XAxis dataKey="users" />
-        <YAxis />
+        <CartesianGrid strokeDasharray="2 2" />
+        <XAxis
+          dataKey="week"
+          stroke="#888888"
+          fontSize={12}
+          tickLine
+          axisLine
+        />
+        <YAxis dataKey="users" />
         <Tooltip />
         <Line
           connectNulls
           type="linear"
-          dataKey="uv"
-          stroke="#8884d8"
-          fill="#8884d8"
+          dataKey="users"
+          stroke="#1eff00"
+          fill="#ff0000"
         />
       </LineChart>
     </ResponsiveContainer>

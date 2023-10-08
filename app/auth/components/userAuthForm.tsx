@@ -33,13 +33,12 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     const { email, password } = data;
     try {
       const response = await loginEmail(email, password);
-      console.log("response", response);
       if (response?.token) {
         localStorage.setItem("userToken", response?.token);
         setIsLoading(false);
+        console.log("oioioi");
         router.push("/");
       } else {
-        console.log("response error", response?.message);
         setIsLoading(false);
       }
     } catch (error) {
@@ -94,19 +93,17 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         <div className="absolute inset-0 flex items-center">
           <span className="w-full border-t" />
         </div>
-        <div className="relative flex justify-center text-xs uppercase">
+        <div className="relative flex justify-center text-xs">
           <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
+            or register below
           </span>
         </div>
       </div>
       <Button variant="outline" type="button" disabled={isLoading}>
         {isLoading ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          <Icons.gitHub className="mr-2 h-4 w-4" />
-        )}{" "}
-        Github
+        ) : undefined}{" "}
+        Register
       </Button>
     </div>
   );

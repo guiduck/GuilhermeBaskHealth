@@ -40,7 +40,9 @@ export async function TransactionsTable({
                 <TableCell className="font-medium">{transaction.id}</TableCell>
                 <TableCell>{transaction.user}</TableCell>
                 <TableCell>{transaction.amount}</TableCell>
-                <TableCell className="text-right">{transaction.date}</TableCell>
+                <TableCell className="text-right">
+                  {new Date(transaction.date).toLocaleDateString("en-GB")}
+                </TableCell>
               </TableRow>
             ))}
         </TableBody>
