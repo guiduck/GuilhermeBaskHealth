@@ -12,9 +12,9 @@ import {
   FormItem,
   FormLabel,
 } from "@/components/Form";
-import { useWidgetsStore } from "@/stores/widgets";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { useWidgetsStore } from "@/src/stores/widgets";
 
 const displayFormSchema = z.object({
   items: z.array(z.string()).refine((value) => value.some((item) => item), {

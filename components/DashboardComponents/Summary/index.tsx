@@ -6,6 +6,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "../Card";
 interface SummaryProps {
   title: string;
   values: number[];
+  itemString?: string;
   icon: ReactNode;
 }
 
@@ -14,7 +15,12 @@ const getValue = (values: number[]) =>
 
 const getHighest = (values: number[]) => Math.max(...(values || []));
 
-export default function Summary({ title, values, icon }: SummaryProps) {
+export default function Summary({
+  title,
+  values,
+  icon,
+  itemString,
+}: SummaryProps) {
   const value = useMemo(() => getValue(values) || "", [values]);
 
   const highest = useMemo(() => getHighest(values) || "", [values]);
@@ -26,8 +32,12 @@ export default function Summary({ title, values, icon }: SummaryProps) {
         {icon}
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold">{value}</div>
-        <p className="text-xs text-muted-foreground">{highest} highest</p>
+        <div className="text-2xl font-bold">
+          {itemString} {value}
+        </div>
+        <p className="text-xs text-muted-foreground">
+          {itemString} {highest} highest
+        </p>
       </CardContent>
     </Card>
   );

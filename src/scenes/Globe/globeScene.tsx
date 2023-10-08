@@ -4,7 +4,13 @@ import React, { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { LocationsType } from "@/components/DashboardComponents/types";
-import GlobeComponent from "./globeComponent";
+import dynamic from "next/dynamic";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const GlobeComponent = dynamic(() => import("./globeComponent"), {
+  loading: () => <Skeleton className="w-full h-[500px]" />,
+  ssr: false,
+});
 
 export default function GlobeScene({ mapData }: { mapData: LocationsType }) {
   const [domReady, setDomReady] = useState(false);
@@ -40,7 +46,6 @@ export default function GlobeScene({ mapData }: { mapData: LocationsType }) {
             position={[-200, 500, 200]}
             intensity={0.5}
           />
-
           <GlobeComponent mapData={mapData} />
           <fog attach="fog" args={["#5f002c", 300, 2000]} />
           <OrbitControls

@@ -1,3 +1,6 @@
+"use client";
+
+import { useWidgetsStore } from "@/src/stores/widgets";
 import {
   Card,
   CardHeader,
@@ -14,29 +17,35 @@ const RecentTransactions = ({
 }: {
   dashboardData: DashbaordDataType;
 }) => {
+  const { displayItems } = useWidgetsStore();
+
   return (
-    <Card className="col-span-6 md:col-span-4 lg:col-span-3">
-      <CardHeader>
-        <CardTitle>Recent Transactions</CardTitle>
-        <CardDescription>
-          You traded $
-          {dashboardData?.tables?.recentTransactions?.reduce(
-            (total, transaction) =>
-              total + parseInt(transaction?.amount?.slice(1)),
-            0
-          )}{" "}
-          this month.
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <TransactionsTable
-          recentTransactions={dashboardData?.tables?.recentTransactions}
-        />
-        <TableCaption className="flex w-full">
-          A list of your recent transactions.
-        </TableCaption>
-      </CardContent>
-    </Card>
+    <>
+      {displayItems?.includes("recentTransactions") ? (
+        <Card className="col-span-6 md:col-span-4 lg:col-span-3">
+          <CardHeader>
+            <CardTitle>Recent Transactions</CardTitle>
+            <CardDescription>
+              You traded $
+              {dashboardData?.tables?.recentTransactions?.reduce(
+                (total, transaction) =>
+                  total + parseInt(transaction?.amount?.slice(1)),
+                0
+              )}{" "}
+              this month.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <TransactionsTable
+              recentTransactions={dashboardData?.tables?.recentTransactions}
+            />
+            <TableCaption className="flex w-full">
+              A list of your recent transactions.
+            </TableCaption>
+          </CardContent>
+        </Card>
+      ) : undefined}
+    </>
   );
 };
 

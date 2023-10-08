@@ -1,6 +1,6 @@
 import Dashboard from "@/components/DashboardComponents/Dashboard";
 import { ToggleMode } from "@/components/ToggleMode";
-import api from "@/services/api";
+import api from "@/src/services/api";
 import { Metadata } from "next";
 
 import { cache } from "react";
