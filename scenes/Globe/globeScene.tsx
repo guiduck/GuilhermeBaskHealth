@@ -3,13 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import dynamic from "next/dynamic";
+import { LocationsType } from "@/components/DashboardComponents/types";
+import GlobeComponent from "./globeComponent";
 
-const GlobeComponent = dynamic(() => import("./globeComponent"), {
-  ssr: false,
-});
-
-export default function GlobeScene() {
+export default function GlobeScene({ mapData }: { mapData: LocationsType }) {
   const [domReady, setDomReady] = useState(false);
 
   useEffect(() => {
@@ -44,7 +41,7 @@ export default function GlobeScene() {
             intensity={0.5}
           />
 
-          <GlobeComponent />
+          <GlobeComponent mapData={mapData} />
           <fog attach="fog" args={["#5f002c", 300, 2000]} />
           <OrbitControls
             enableZoom

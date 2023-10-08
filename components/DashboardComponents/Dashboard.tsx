@@ -261,7 +261,7 @@ export default function Dashboard({
                 <CardTitle>Your Locations</CardTitle>
               </CardHeader>
               <CardContent className="pl-2 h-[600px]">
-                <GlobeScene />
+                <GlobeScene mapData={dashboardData?.map?.locations} />
               </CardContent>
             </Card>
           )}

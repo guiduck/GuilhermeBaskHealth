@@ -1,21 +1,38 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 import * as THREE from "three";
 import ThreeGlobe from "three-globe";
 import countries from "../../public/files/custom.geo.json";
 import lines from "../../public/files/lines.json";
 import map from "../../public/files/map.json";
 import { useFrame } from "@react-three/fiber";
-import { useWidgetsStore } from "@/stores/widgets";
 
-export default function GlobeComponent() {
-  const globeRef = useRef<any>(ThreeGlobe);
+function parseMapData(inputData) {
+  const parsedData = inputData?.map((item) => ({
+    size: 2.0,
+    lat: item.latitude.toFixed(6),
+    lng: item.longitude.toFixed(6),
+    city: item.label,
+  }));
 
-  const { displayItems } = useWidgetsStore();
+  return { type: "Map", maps: parsedData || map.maps };
+}
+
+export default function GlobeComponent({
+  mapData,
+}) {
+  const [globeLoaded, setGlobeLoaded] = useState(false);
+  const globeRef = useRef(null);
+
+  const parsedMapData = useMemo(
+    () => parseMapData(mapData) || { type: "Map", maps: [] },
+    [mapData]
+  );
+  console.log(parsedMapData);
 
   useEffect(() => {
-    let globe: any = new ThreeGlobe({
+    let globe = new ThreeGlobe({
       waitForGlobeReady: true,
       animateIn: true,
     });
@@ -27,32 +44,32 @@ export default function GlobeComponent() {
       .atmosphereColor("#ff5100")
       .atmosphereAltitude(0.4);
 
-    setTimeout(() => {
+    // setTimeout(() => {
       globe
         .arcsData(lines.pulls)
-        .arcColor((e: any) => {
+        .arcColor((e) => {
           return e.status ? "#9cff00" : "#ff4000";
         })
-        .arcAltitude((e: any) => {
+        .arcAltitude((e) => {
           return e.arcAlt;
         })
-        .arcStroke((e: any) => {
+        .arcStroke((e) => {
           return e.status ? 0.5 : 0.3;
         })
         .arcDashLength(0.9)
         .arcDashGap(4)
         .arcDashAnimateTime(1000)
         .arcsTransitionDuration(1000)
-        .arcDashInitialGap((e: any) => e.order * 1)
-        .labelsData(map.maps)
+        .arcDashInitialGap((e) => e.order * 1)
+        .labelsData(parsedMapData.maps)
         .labelColor(() => "#ffcb21")
 
         .labelDotRadius(0.7)
-        .labelSize((e: any) => e.size)
+        .labelSize((e) => e.size)
         .labelText("city")
         .labelResolution(8)
         .labelAltitude(0.04)
-        .pointsData(map.maps)
+        .pointsData(parsedMapData.maps)
         .pointColor(() => "#ffdf53")
         .pointsMerge(true)
         .pointAltitude(0.03)
@@ -68,8 +85,9 @@ export default function GlobeComponent() {
       globeMaterial.shininess = 0.7;
 
       globeRef.current = globe;
-    }, 1000);
-  }, [displayItems]);
+      setGlobeLoaded(true);
+    // }, 1000);
+  }, []);
 
   useFrame(() => {
     if (globeRef.current) {
@@ -77,7 +95,5 @@ export default function GlobeComponent() {
     }
   });
 
-  return (
-    <>{globeRef.current ? <primitive object={globeRef.current} /> : null}</>
-  );
+  return <>{globeLoaded ? <primitive object={globeRef.current} /> : null}</>;
 }
