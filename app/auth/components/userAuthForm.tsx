@@ -9,7 +9,6 @@ import { Button } from "@/components/ButtonNy";
 import { Icons } from "@/components/Icons";
 import { loginEmail } from "@/src/services/auth";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 
 type LoginFormType = {
   email: string;
@@ -19,7 +18,6 @@ type LoginFormType = {
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-  const router = useRouter();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const {
@@ -36,8 +34,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       if (response?.token) {
         localStorage.setItem("userToken", response?.token);
         setIsLoading(false);
-        console.log("oioioi");
-        router.push("/");
+        window.location.href = "/";
       } else {
         setIsLoading(false);
       }
