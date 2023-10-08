@@ -43,9 +43,9 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <Suspense fallback={<div>Loading...</div>}>
-          {dashboardData && <Dashboard dashboardData={dashboardData} />}
-        </Suspense>
+        {/* <Suspense fallback={<div>Loading...</div>}> */}
+        {dashboardData && <Dashboard dashboardData={dashboardData} />}
+        {/* </Suspense> */}
       </div>
     </>
   );
