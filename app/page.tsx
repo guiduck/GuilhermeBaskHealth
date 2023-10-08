@@ -18,8 +18,6 @@ const getUserData = cache(async () => {
   try {
     const { data } = await api.get(path);
     if (data.success) {
-      console.log(data);
-      console.log(data);
       return data.data.dashboardData;
     } else {
       console.log(data.secretMessage);
@@ -30,10 +28,7 @@ const getUserData = cache(async () => {
 });
 
 export default async function Home() {
-  // const awaiting = await new Promise((resolve) => setTimeout(resolve, 5000));
   const dashboardData = await getUserData();
-
-  // const awaiting = await new Promise((resolve) => setTimeout(resolve, 20000));
 
   return (
     <div className="w-screen bg-[#F8FAFC] dark:bg-[#020817]">

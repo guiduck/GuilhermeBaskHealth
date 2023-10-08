@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, useMemo } from "react";
-import { Card, CardHeader, CardTitle, CardContent } from "../Card";
+import { Card, CardHeader, CardTitle, CardContent } from "../../Card";
 
 interface SummaryProps {
   title: string;

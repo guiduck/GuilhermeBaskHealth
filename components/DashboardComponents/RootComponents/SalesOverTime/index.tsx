@@ -1,12 +1,12 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Card, CardHeader, CardTitle, CardContent } from "../Card";
-import { ChartType } from "../types";
+import { Card, CardHeader, CardTitle, CardContent } from "../../Card";
+import { ChartType } from "../../types";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useWidgetsStore } from "@/src/stores/widgets";
 
-const ChartBar = dynamic(() => import("../ChartBar"), {
+const ChartBar = dynamic(() => import("../../ChartBar"), {
   loading: () => <Skeleton className="w-full h-[420px]" />,
   ssr: false,
 });

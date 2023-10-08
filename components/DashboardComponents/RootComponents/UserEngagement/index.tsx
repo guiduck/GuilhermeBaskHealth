@@ -1,9 +1,9 @@
 "use client";
 
 import { useWidgetsStore } from "@/src/stores/widgets";
-import { Card, CardHeader, CardTitle, CardContent } from "../Card";
-import { ChartLine } from "../ChartLine";
-import { ChartType } from "../types";
+import { Card, CardHeader, CardTitle, CardContent } from "../../Card";
+import { ChartLine } from "../../ChartLine";
+import { ChartType } from "../../types";
 
 export default function UserEngagement({
   usersData,
@@ -11,6 +11,7 @@ export default function UserEngagement({
   usersData: ChartType;
 }) {
   const { displayItems } = useWidgetsStore();
+
   return (
     <>
       {displayItems?.includes("userEngagement") ? (

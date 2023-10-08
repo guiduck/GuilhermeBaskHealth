@@ -1,5 +1,5 @@
-import { UserNav } from "../DashboardComponents/UserNav";
-import { DisplayForm } from "../DashboardComponents/DisplayForm";
+import { UserNav } from "@/components/UserNav";
+import { DisplayForm } from "../../DisplayForm";
 
 export default async function DashboardHeader() {
   return (

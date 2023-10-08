@@ -7,9 +7,9 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-} from "../Card";
-import { ProductsTable } from "../ProductsTable";
-import { TopProductsType } from "../types";
+} from "../../Card";
+import { ProductsTable } from "../../ProductsTable";
+import { TopProductsType } from "../../types";
 
 export default function TopProducts({
   productsData,

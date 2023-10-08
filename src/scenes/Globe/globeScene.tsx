@@ -5,10 +5,8 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { LocationsType } from "@/components/DashboardComponents/types";
 import dynamic from "next/dynamic";
-import { Skeleton } from "@/components/ui/skeleton";
 
 const GlobeComponent = dynamic(() => import("./globeComponent"), {
-  loading: () => <Skeleton className="w-full h-[500px]" />,
   ssr: false,
 });
 
