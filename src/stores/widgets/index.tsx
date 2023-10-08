@@ -10,7 +10,6 @@ export const defaultWdgetState = [
   "salesOverTime",
   "userEngagement",
   "topProducts",
-  "map",
 ];
 
 export const useWidgetsStore = create<StoreProps>((set) => ({

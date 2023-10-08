@@ -1,8 +1,7 @@
-import "styles/globals.css";
+import "../src/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import Navbar from "@/components/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -38,10 +37,10 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system">
-          <Navbar />
           <ToastContainer theme="dark" />
-          {children}
-          {/* <Footer /> */}
+          <div className="relative w-screen max-w-[100vw] !overflow-y-auto !overflow-x-hidden">
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>

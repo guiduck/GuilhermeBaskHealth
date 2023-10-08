@@ -1,15 +1,28 @@
-import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
-import { ChartType } from "../types";
+"use client";
 
-export async function ChartBar({ sales }: { sales: ChartType }) {
-  const chartData =
-    sales?.labels?.map((l, index) => ({
-      name: l,
-      total: sales?.data[index],
-    })) || [];
+import {
+  Bar,
+  BarChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { ChartType } from "../types";
+import { useMemo } from "react";
+
+export default function ChartBar({ sales }: { sales: ChartType }) {
+  const chartData = useMemo(
+    () =>
+      sales?.labels?.map((l, index) => ({
+        name: new Date(l).toLocaleDateString("en-GB"),
+        total: sales?.data[index],
+      })) || [],
+    [sales]
+  );
 
   return (
-    <ResponsiveContainer width="100%" height={350}>
+    <ResponsiveContainer width="100%" height={400}>
       <BarChart data={chartData}>
         <XAxis
           dataKey="name"
@@ -25,7 +38,8 @@ export async function ChartBar({ sales }: { sales: ChartType }) {
           axisLine={false}
           tickFormatter={(value) => `$${value}`}
         />
-        <Bar dataKey="total" fill="#adfa1d" radius={[4, 4, 0, 0]} />
+        <Tooltip />
+        <Bar dataKey="total" fill="#fab41d" radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );

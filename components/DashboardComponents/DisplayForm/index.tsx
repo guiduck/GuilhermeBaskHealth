@@ -11,9 +11,10 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/Form";
-import { useWidgetsStore } from "@/stores/widgets";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { useWidgetsStore } from "@/src/stores/widgets";
 
 const displayFormSchema = z.object({
   items: z.array(z.string()).refine((value) => value.some((item) => item), {
@@ -37,6 +38,13 @@ export function DisplayForm({ items, displayLabel }: DisplayFormProps) {
   const form = useForm<DisplayFormValues>({
     resolver: zodResolver(displayFormSchema),
   });
+  const { errors } = form.formState;
+
+  useEffect(() => {
+    if (errors.items?.message) {
+      toast.error(errors.items?.message);
+    }
+  }, [errors.items]);
 
   const { setDisplayItems, displayItems } = useWidgetsStore();
 
@@ -52,53 +60,52 @@ export function DisplayForm({ items, displayLabel }: DisplayFormProps) {
           control={form.control}
           name="items"
           render={() => (
-            <FormItem className="flex gap-6">
-              <div className="mb-4">
-                <FormLabel className="text-base">
-                  {displayLabel ?? "Summary"}
-                </FormLabel>
-              </div>
-              {items.map((item) => (
-                <FormField
-                  key={item.id}
-                  control={form.control}
-                  name={"items"}
-                  render={({ field }) => {
-                    return (
-                      <FormItem
-                        key={item.id}
-                        className="flex flex-row items-start space-x-3 space-y-0"
-                      >
-                        <FormControl>
-                          <Checkbox
-                            type="submit"
-                            checked={displayItems.includes(item.id)}
-                            onCheckedChange={(checked) => {
-                              if (Array.isArray(field.value)) {
-                                if (checked) {
-                                  field.onChange([...field.value, item.id]);
+            <FormItem className="relative">
+              <div className="grid gap-2 grid-cols-3 lg:flex lg:gap-6">
+                <div className="mb-4">
+                  <FormLabel className="text-base">{displayLabel}</FormLabel>
+                </div>
+                {items.map((item) => (
+                  <FormField
+                    key={item.id}
+                    control={form.control}
+                    name={"items"}
+                    render={({ field }) => {
+                      return (
+                        <FormItem
+                          key={item.id}
+                          className="flex flex-row items-start space-x-3 space-y-0"
+                        >
+                          <FormControl>
+                            <Checkbox
+                              type="submit"
+                              checked={displayItems.includes(item.id)}
+                              onCheckedChange={(checked) => {
+                                if (Array.isArray(field.value)) {
+                                  if (checked) {
+                                    field.onChange([...field.value, item.id]);
+                                  } else {
+                                    field.onChange(
+                                      field.value.filter(
+                                        (value) => value !== item.id
+                                      )
+                                    );
+                                  }
                                 } else {
-                                  field.onChange(
-                                    field.value.filter(
-                                      (value) => value !== item.id
-                                    )
-                                  );
+                                  field.onChange([item.id]);
                                 }
-                              } else {
-                                field.onChange([item.id]);
-                              }
-                            }}
-                          />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          {item.label}
-                        </FormLabel>
-                      </FormItem>
-                    );
-                  }}
-                />
-              ))}
-              <FormMessage />
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="text-xs font-normal">
+                            {item.label}
+                          </FormLabel>
+                        </FormItem>
+                      );
+                    }}
+                  />
+                ))}
+              </div>
             </FormItem>
           )}
         />

@@ -1,23 +1,24 @@
 import Dashboard from "@/components/DashboardComponents/Dashboard";
-import { MainNav } from "@/components/DashboardComponents/MainNav";
-import { UserNav } from "@/components/DashboardComponents/UserNav";
-import api from "@/services/api";
+import { ToggleMode } from "@/components/ToggleMode";
+import api from "@/src/services/api";
 import { Metadata } from "next";
 
-import { Suspense, cache } from "react";
+import { cache } from "react";
 
 export const metadata: Metadata = {
   title: "Dashboard",
   description: "User dashboard for data visualization.",
 };
 
-export const revalidate = 5; //revalidate every 5 seconds
+export const revalidate = 5;
 
 const getUserData = cache(async () => {
   const path = `${process.env.NEXT_PUBLIC_API_URL}/api/get`;
+
   try {
     const { data } = await api.get(path);
     if (data.success) {
+      console.log(data);
       console.log(data);
       return data.data.dashboardData;
     } else {
@@ -31,22 +32,20 @@ const getUserData = cache(async () => {
 export default async function Home() {
   // const awaiting = await new Promise((resolve) => setTimeout(resolve, 5000));
   const dashboardData = await getUserData();
+
+  // const awaiting = await new Promise((resolve) => setTimeout(resolve, 20000));
+
   return (
-    <>
-      <div className="w-full h-16 bg-slate-50 dark:bg-[#020817]" />
-      <div className="hidden flex-col md:flex">
-        <div className="border-b">
-          <div className="flex h-16 items-center px-4">
-            <MainNav className="mx-6" />
-            <div className="ml-auto">
-              <UserNav />
-            </div>
+    <div className="w-screen bg-[#F8FAFC] dark:bg-[#020817]">
+      <div className="w-full max-w-6xl m-0 mx-auto bg-slate-50 dark:bg-[#020817]">
+        <div className="flex-col flex relative">
+          <div className="flex flex-1 space-y-4 p-8 pt-6 pb-0 justify-between">
+            <div />
+            <ToggleMode />
           </div>
+          <Dashboard dashboardData={dashboardData} />
         </div>
-        <Suspense fallback={<div>Loading...</div>}>
-          {dashboardData && <Dashboard dashboardData={dashboardData} />}
-        </Suspense>
       </div>
-    </>
+    </div>
   );
 }

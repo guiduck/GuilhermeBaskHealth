@@ -3,9 +3,9 @@
 import { useRef, useEffect, useState, useMemo } from "react";
 import * as THREE from "three";
 import ThreeGlobe from "three-globe";
-import countries from "../../public/files/custom.geo.json";
-import lines from "../../public/files/lines.json";
-import map from "../../public/files/map.json";
+import countries from "../../../public/files/custom.geo.json";
+import lines from "../../../public/files/lines.json";
+import map from "../../../public/files/map.json";
 import { useFrame } from "@react-three/fiber";
 
 function parseMapData(inputData) {
@@ -41,7 +41,7 @@ export default function GlobeComponent({
       .hexPolygonResolution(4)
       .hexPolygonMargin(0.4)
       .showAtmosphere(true)
-      .atmosphereColor("#ff5100")
+      .atmosphereColor("purple")
       .atmosphereAltitude(0.4);
 
     // setTimeout(() => {
@@ -91,7 +91,8 @@ export default function GlobeComponent({
 
   useFrame(() => {
     if (globeRef.current) {
-      globeRef.current.position.z += 0.001;
+      globeRef.current.rotation.z += 0.001;
+      globeRef.current.rotation.y += 0.001;
     }
   });
 
