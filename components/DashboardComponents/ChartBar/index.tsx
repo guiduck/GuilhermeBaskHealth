@@ -1,18 +1,12 @@
-"use client";
-
-import { useMemo } from "react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { ChartType } from "../types";
 
 export async function ChartBar({ sales }: { sales: ChartType }) {
-  const chartData = useMemo(
-    () =>
-      sales?.labels?.map((l, index) => ({
-        name: l,
-        total: sales?.data[index],
-      })) || [],
-    [sales]
-  );
+  const chartData =
+    sales?.labels?.map((l, index) => ({
+      name: l,
+      total: sales?.data[index],
+    })) || [];
 
   return (
     <ResponsiveContainer width="100%" height={350}>

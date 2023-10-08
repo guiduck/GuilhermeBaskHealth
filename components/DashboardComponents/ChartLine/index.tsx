@@ -12,11 +12,7 @@ import {
 } from "recharts";
 import { ChartType } from "../types";
 
-export async function ChartLine({
-  userEngagement,
-}: {
-  userEngagement: ChartType;
-}) {
+export function ChartLine({ userEngagement }: { userEngagement: ChartType }) {
   const chartData = useMemo(
     () =>
       userEngagement?.labels?.map((l, index) => ({

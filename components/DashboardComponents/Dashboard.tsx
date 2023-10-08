@@ -19,7 +19,7 @@ import { useWidgetsStore } from "@/stores/widgets";
 import { TransactionsTable } from "./TransactionsTable";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
-
+import GlobeScene from "@/scenes/Globe/globeScene";
 export default function Dashboard({
   dashboardData,
 }: {
@@ -30,33 +30,35 @@ export default function Dashboard({
 
   return (
     <div className="flex-1 space-y-4 p-8 pt-6">
-      <div className="flex items-center justify-between space-y-2">
+      <div className="flex items-center justify-between space-y-2 opacity-80">
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
         <div>
           <p className="text-[0.8rem] text-muted-foregrounds">
             Select the widgets you want to display in the Dashboard.
           </p>
-          <div className="flex gap-12">
-            <DisplayForm
-              displayLabel="Widgets"
-              items={[
-                {
-                  id: "salesOverTime",
-                  label: "sales over time",
-                },
-                {
-                  id: "userEngagement",
-                  label: "user engagement",
-                },
-                {
-                  id: "recentTransactions",
-                  label: "recent transactions",
-                },
-                { id: "topProducts", label: "top products" },
-                { id: "map", label: "map" },
-              ]}
-            />
-          </div>
+          <Suspense fallback={<Skeleton className="flex gap-12" />}>
+            <div className="flex gap-12">
+              <DisplayForm
+                displayLabel="Widgets"
+                items={[
+                  {
+                    id: "salesOverTime",
+                    label: "sales over time",
+                  },
+                  {
+                    id: "userEngagement",
+                    label: "user engagement",
+                  },
+                  {
+                    id: "recentTransactions",
+                    label: "recent transactions",
+                  },
+                  { id: "topProducts", label: "top products" },
+                  { id: "map", label: "map" },
+                ]}
+              />
+            </div>
+          </Suspense>
         </div>
         <Button>Edit workspace</Button>
       </div>
@@ -251,6 +253,20 @@ export default function Dashboard({
           </div>
         </TabsContent>
       </Tabs>
+      <div className="grid gap-4 md:grid-cols-1 h-[600px]">
+        <Suspense fallback={<Skeleton className="col-span-6" />}>
+          {displayItems?.includes("map") && (
+            <Card className="col-span-6">
+              <CardHeader>
+                <CardTitle>Your Locations</CardTitle>
+              </CardHeader>
+              <CardContent className="pl-2 h-[600px]">
+                <GlobeScene mapData={dashboardData?.map?.locations} />
+              </CardContent>
+            </Card>
+          )}
+        </Suspense>
+      </div>
     </div>
   );
 }
