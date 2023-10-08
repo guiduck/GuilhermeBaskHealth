@@ -17,6 +17,7 @@ export async function POST(request: Request) {
   //     { status: 401 }
   //   );
   // }
+
   if (!email || !password) {
     return NextResponse.json(
       { message: "Missing required data" },
