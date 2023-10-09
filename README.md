@@ -30,7 +30,7 @@ You can see a live demo of [BaskHealths dashboard here!](https://guilherme-bask-
 ## Project Structure
 
 - `src/app` code base for layout, pages;
-- `src/api` api routes used for authentication;
+- `src/app/api` api routes used for authentication;
 - `src/lib` utils file;
 - `src/middleware` middleware for authenticated paths;
 - `src/components` components isolated with their styling;
