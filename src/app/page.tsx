@@ -2,6 +2,7 @@ import Dashboard from "@/components/DashboardComponents/Dashboard";
 import { ToggleMode } from "@/components/ToggleMode";
 import api from "@/services/api";
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import { cache } from "react";
 
@@ -14,11 +15,20 @@ export const revalidate = 5;
 
 const getUserData = cache(async () => {
   const path = `${process.env.NEXT_PUBLIC_API_URL}/api/get`;
-  const { data } = await api.get(path);
-  if (data.success) {
-    return data.data.dashboardData;
-  } else if (data.secretMessage) {
-    throw Error(data?.secretMessage || "There was an error with your request");
+  try {
+    const { data } = await api.get(path);
+    if (data.success) {
+      return data.data.dashboardData;
+    } else if (data.secretMessage) {
+      throw Error(
+        data?.secretMessage || "There was an error with your request"
+      );
+    }
+  } catch (err: any) {
+    if (!err?.response?.data?.success && err?.response?.data?.message) {
+      console.error(err.response?.data?.message || err.message);
+      redirect("/auth");
+    }
   }
 });
 

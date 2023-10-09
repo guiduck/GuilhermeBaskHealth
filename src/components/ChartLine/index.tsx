@@ -11,8 +11,10 @@ import {
   YAxis,
 } from "recharts";
 import { ChartType } from "../DashboardComponents/types";
+import { useTheme } from "next-themes";
 
 export function ChartLine({ userEngagement }: { userEngagement: ChartType }) {
+  const { theme } = useTheme();
   const chartData = useMemo(
     () =>
       userEngagement?.labels?.map((l, index) => ({
@@ -49,8 +51,8 @@ export function ChartLine({ userEngagement }: { userEngagement: ChartType }) {
           connectNulls
           type="linear"
           dataKey="users"
-          stroke="#1eff00"
-          fill="#ff0000"
+          stroke={theme === "light" ? "#1eff00" : "#ff00d4"}
+          fill={theme === "light" ? "#ff00c8" : "#00c3ff"}
         />
       </LineChart>
     </ResponsiveContainer>
