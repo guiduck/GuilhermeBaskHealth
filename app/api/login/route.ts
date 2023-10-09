@@ -11,12 +11,13 @@ type userLoginType = {
 export async function POST(request: Request) {
   const { email, password }: userLoginType = await request.json();
 
-  if (email !== "guiduck02@gmail.com" || password !== "admin123") {
-    return NextResponse.json(
-      { message: "Invalid credentials" },
-      { status: 401 }
-    );
-  }
+  // if (email !== "guiduck02@gmail.com" || password !== "admin123") {
+  //   return NextResponse.json(
+  //     { message: "Invalid credentials" },
+  //     { status: 401 }
+  //   );
+  // }
+
   if (!email || !password) {
     return NextResponse.json(
       { message: "Missing required data" },
