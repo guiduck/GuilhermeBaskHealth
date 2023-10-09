@@ -1,6 +1,5 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -45,16 +44,25 @@ export function DisplayForm({ items, displayLabel }: DisplayFormProps) {
   }, [errors.items]);
 
   const { setDisplayItems, displayItems } = useWidgetsStore();
-  console.log({ displayItems });
-  function onSubmit(data: any) {
-    const { items } = data;
-    const itemClicked = items;
 
-    if (displayItems.includes(itemClicked)) {
-      setDisplayItems(displayItems.filter((item) => item !== itemClicked));
-    } else {
-      setDisplayItems([...displayItems, itemClicked]);
-    }
+  function onSubmit(data: DisplayFormValues) {
+    const { items } = data;
+
+    const itemsArray = Array.isArray(items) ? items : [items];
+
+    let updatedDisplayItems: string[] = [...displayItems];
+
+    itemsArray.forEach((itemClicked) => {
+      if (updatedDisplayItems.includes(itemClicked)) {
+        updatedDisplayItems = updatedDisplayItems.filter(
+          (item) => item !== itemClicked
+        );
+      } else {
+        updatedDisplayItems.push(itemClicked);
+      }
+    });
+
+    setDisplayItems(updatedDisplayItems);
   }
 
   return (
