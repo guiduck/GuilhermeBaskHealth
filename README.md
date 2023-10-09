@@ -155,13 +155,13 @@ Visit [http://localhost:3000](http://localhost:3000) to explore the application.
 
 While developing the dashboard, I am primarly focused on enhancing user experience and functionality:
 
-**Streamlined Token Authorization:** add the authorization header through the middleware that checks for authentication instead of axios interceptor.
+- **Streamlined Token Authorization:** add the authorization header through the middleware that checks for authentication instead of axios interceptor.
 
-**Enhanced World Map Performance:** Optimizing the interactive world map to reduce initial loading time.
+- **Enhanced World Map Performance:** Optimizing the interactive world map to reduce initial loading time.
 
-**Drag-and-Drop Widget Editing:** Introducing a user-friendly dashboard customization feature for intuitive widget arrangement.
+- **Drag-and-Drop Widget Editing:** Introducing a user-friendly dashboard customization feature for intuitive widget arrangement.
 
-**Fixed Map Orientation with User Interaction:** Creating an engaging map experience, inspired by Vercel's site, where users can drag and rotate while the map only spins in a fixed axis.
+- **Fixed Map Orientation with User Interaction:** Creating an engaging map experience, inspired by Vercel's site, where users can drag and rotate while the map only spins in a fixed axis.
 
 ## License
 
