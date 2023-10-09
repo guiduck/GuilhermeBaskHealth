@@ -3,7 +3,7 @@
 import { useWidgetsStore } from "@/stores/widgets";
 import { Card, CardHeader, CardTitle, CardContent } from "../../Card";
 import { ChartLine } from "../../ChartLine";
-import { ChartType } from "../../types";
+import { ChartType } from "../types";
 
 export default function UserEngagement({
   usersData,

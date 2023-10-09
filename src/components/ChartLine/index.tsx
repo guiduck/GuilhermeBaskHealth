@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { ChartType } from "../types";
+import { ChartType } from "../DashboardComponents/types";
 
 export function ChartLine({ userEngagement }: { userEngagement: ChartType }) {
   const chartData = useMemo(

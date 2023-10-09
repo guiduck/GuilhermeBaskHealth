@@ -9,7 +9,7 @@ import {
   CardContent,
 } from "../../Card";
 import { ProductsTable } from "../../ProductsTable";
-import { TopProductsType } from "../../types";
+import { TopProductsType } from "../types";
 
 export default function TopProducts({
   productsData,

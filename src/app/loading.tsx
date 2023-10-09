@@ -1,8 +1,4 @@
-import {
-  Card,
-  CardHeader,
-  CardContent,
-} from "@/components/DashboardComponents/Card";
+import { Card, CardHeader, CardContent } from "@/components/Card";
 import { Icons } from "@/components/Icons";
 import { ToggleMode } from "@/components/ToggleMode";
 import { Skeleton } from "@/components/ui/skeleton";

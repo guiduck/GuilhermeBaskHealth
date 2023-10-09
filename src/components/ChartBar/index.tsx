@@ -8,7 +8,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { ChartType } from "../types";
+import { ChartType } from "../DashboardComponents/types";
 import { useMemo } from "react";
 
 export default function ChartBar({ sales }: { sales: ChartType }) {

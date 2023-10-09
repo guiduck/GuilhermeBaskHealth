@@ -34,7 +34,7 @@ export default function DashboardHeader() {
             </div>
           </div>
         </div>
-        <div className="self-baseline md:self-end pb-8">
+        <div className="self-baseline md:self-end pb-8" data-testid="user-nav">
           <UserNav />
         </div>
       </div>

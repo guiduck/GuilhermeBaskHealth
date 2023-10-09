@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { Card, CardHeader, CardTitle, CardContent } from "../../Card";
-import { ChartType } from "../../types";
+import { ChartType } from "../types";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useWidgetsStore } from "@/stores/widgets";
 

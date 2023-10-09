@@ -1,7 +1,7 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "../Avatar";
-import { TopProductsType } from "../types";
+import { TopProductsType } from "../DashboardComponents/types";
 
 interface TableItemProps {
   id: string;

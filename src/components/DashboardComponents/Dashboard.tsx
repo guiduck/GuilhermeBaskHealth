@@ -1,13 +1,13 @@
 import { Tabs, TabsContent } from "@/components/Tabs";
 import { DashbaordDataType } from "./types";
 import RecentTransactions from "../RecentTransactions";
-import DashboardHeader from "./RootComponents/DashboardHeader";
-import Summary from "./RootComponents/Summary";
+import DashboardHeader from "./DashboardHeader";
+import Summary from "./Summary";
 import { Icons } from "../Icons";
-import SalesOverTime from "./RootComponents/SalesOverTime";
-import UserEngagement from "./RootComponents/UserEngagement/index";
-import TopProducts from "./RootComponents/TopProducts";
-import WorldMap from "./RootComponents/WorldMap";
+import SalesOverTime from "./SalesOverTime";
+import UserEngagement from "./UserEngagement/index";
+import TopProducts from "./TopProducts";
+import WorldMap from "./WorldMap";
 
 export default function Dashboard({
   dashboardData,

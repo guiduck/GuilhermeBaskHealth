@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  Avatar,
-  AvatarFallback,
-} from "@/components/DashboardComponents/Avatar";
+import { Avatar, AvatarFallback } from "@/components/Avatar";
 import { Button } from "@/components/ButtonNy";
 import {
   DropdownMenu,
@@ -13,7 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/DashboardComponents/DropdownMenuNy";
+} from "@/components/DropdownMenuNy";
 import { logoutUser } from "@/services/auth";
 
 export function UserNav() {

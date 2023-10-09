@@ -7,8 +7,8 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-} from "../DashboardComponents/Card";
-import { TransactionsTable } from "../DashboardComponents/RootComponents/TransactionsTable";
+} from "../Card";
+import { TransactionsTable } from "../DashboardComponents/TransactionsTable";
 import { DashbaordDataType } from "../DashboardComponents/types";
 import { TableCaption } from "../ui/table";
 
