@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, OrthographicCamera } from "@react-three/drei";
 import { LocationsType } from "@/components/DashboardComponents/types";
 import dynamic from "next/dynamic";
 
@@ -21,12 +21,24 @@ export default function GlobeScene({ mapData }: { mapData: LocationsType }) {
     <Canvas className="w-full h-[600px]" shadows dpr={[1, 2]}>
       {domReady && (
         <>
-          <perspectiveCamera
+          {/* <perspectiveCamera
             position={[0, 0, 1600]}
             aspect={1}
             fov={100}
             updateProjectionMatrix={() => {}}
-          />
+          />  */}
+          <OrthographicCamera position={[0, 0, 5700]} zoom={10} />
+          {/* <OrthographicCamera
+            makeDefault
+            zoom={10}
+            top={200}
+            bottom={-200}
+            left={200}
+            right={-200}
+            near={1}
+            far={1200}
+            position={[0, 0, 1200]}
+          /> */}
           <ambientLight color={0xbbbbbb} intensity={0.5} />
           <directionalLight color="0xffffff" position={[0, 0, 5]} />
           <directionalLight
@@ -50,13 +62,13 @@ export default function GlobeScene({ mapData }: { mapData: LocationsType }) {
             enableZoom
             enableDamping
             enablePan
-            minDistance={40}
+            minDistance={100}
             maxDistance={100}
             rotateSpeed={0.5}
             zoomSpeed={1}
             autoRotate={false}
-            minPolarAngle={Math.PI / 3.5}
-            maxPolarAngle={Math.PI - Math.PI / 3}
+            minPolarAngle={Math.PI / 6} // 30 degrees up
+            maxPolarAngle={(3 * Math.PI) / 60}
           />
         </>
       )}
