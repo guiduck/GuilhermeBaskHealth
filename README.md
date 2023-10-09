@@ -111,7 +111,7 @@ You can see a live demo of [BaskHealths dashboard here!](https://guilherme-bask-
 
    ```plaintext
    NEXT_PUBLIC_API_URL=https://dashboard-api-dusky.vercel.app
-   USER_TOKEN=your_user_token_here
+   USER_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
    SITE_URL_LOCAL=http://localhost:3000
 
 ### API Documentation
