@@ -27,7 +27,6 @@ export default function GlobeComponent({ mapData }) {
     () => parseMapData(mapData) || { type: "Map", maps: [] },
     [mapData]
   );
-  console.log(parsedMapData);
 
   useEffect(() => {
     let globe = new ThreeGlobe({
@@ -37,6 +36,7 @@ export default function GlobeComponent({ mapData }) {
     globe
       .hexPolygonsData(countries.features)
       .hexPolygonResolution(4)
+      .hexPolygonAltitude(0.01)
       .hexPolygonMargin(0.4)
       .showAtmosphere(true)
       .atmosphereColor("purple")
@@ -54,28 +54,28 @@ export default function GlobeComponent({ mapData }) {
       .arcStroke((e) => {
         return e.status ? 0.5 : 0.3;
       })
-      .arcDashLength(0.9)
-      .arcDashGap(4)
+      .arcDashLength(1.1)
+      .arcDashGap(5)
       .arcDashAnimateTime(1000)
       .arcsTransitionDuration(1000)
       .arcDashInitialGap((e) => e.order * 1)
       .labelsData(parsedMapData.maps)
-      .labelColor(() => "#ffcb21")
+      .labelColor(() => "#ffc400")
 
-      .labelDotRadius(0.7)
+      .labelDotRadius(0.9)
       .labelSize((e) => e.size)
       .labelText("city")
       .labelResolution(8)
-      .labelAltitude(0.04)
+      .labelAltitude(0.07)
       .pointsData(parsedMapData.maps)
-      .pointColor(() => "#ffdf53")
+      .pointColor(() => "#ff7300")
       .pointsMerge(true)
-      .pointAltitude(0.03)
+      .pointAltitude(0.07)
       .pointRadius(0.08);
 
     globe.rotateY(-Math.PI * (5 / 9));
     globe.rotateZ(-Math.PI / 6);
-    globe.position.set(0, 0, -100);
+    globe.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2.4);
     const globeMaterial = globe.globeMaterial();
     globeMaterial.color = new THREE.Color(0x3a228a);
     globeMaterial.emissive = new THREE.Color(0x220038);
@@ -83,7 +83,6 @@ export default function GlobeComponent({ mapData }) {
     globeMaterial.shininess = 0.7;
 
     globe.position.set(-10, -35, -50);
-    globe.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2.4);
     globe.rotation.x = (Math.PI / 2);
     globe.rotation.y = (-1*Math.PI / 2);
 

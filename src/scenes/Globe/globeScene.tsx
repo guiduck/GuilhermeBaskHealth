@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
+import { EffectComposer, Bloom, Noise } from "@react-three/postprocessing";
 import { OrbitControls, OrthographicCamera } from "@react-three/drei";
 import { LocationsType } from "@/components/DashboardComponents/types";
 import dynamic from "next/dynamic";
@@ -46,6 +47,11 @@ export default function GlobeScene({ mapData }: { mapData: LocationsType }) {
             far={1200}
             position={[0, 0, 1200]}
           /> */}
+          <EffectComposer>
+            <Bloom luminanceThreshold={0.8} luminanceSmoothing={0.9} />
+            {/* <Glitch active={true} duration={new Vector2(2, 1)} /> */}
+            <Noise opacity={0.02} />
+          </EffectComposer>
           <ambientLight color={0xbbbbbb} intensity={0.5} />
           <directionalLight color="0xffffff" position={[0, 0, 5]} />
           <directionalLight
