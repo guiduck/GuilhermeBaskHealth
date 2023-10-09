@@ -2,7 +2,7 @@
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardHeader, CardTitle, CardContent } from "../../Card";
-import { LocationsType } from "../../types";
+import { LocationsType } from "../types";
 import { useWidgetsStore } from "@/stores/widgets";
 import dynamic from "next/dynamic";
 

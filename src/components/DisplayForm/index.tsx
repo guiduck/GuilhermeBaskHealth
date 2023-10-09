@@ -78,6 +78,7 @@ export function DisplayForm({ items, displayLabel }: DisplayFormProps) {
                       return (
                         <FormItem
                           key={item.id}
+                          data-testid="display-item"
                           className="flex flex-row items-start space-x-3 space-y-0"
                         >
                           <FormControl>

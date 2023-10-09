@@ -27,7 +27,14 @@ export default function GlobeScene({ mapData }: { mapData: LocationsType }) {
             fov={100}
             updateProjectionMatrix={() => {}}
           />  */}
-          <OrthographicCamera position={[0, 0, 5700]} zoom={10} />
+          <OrthographicCamera
+            position={[0, 0, 5700]}
+            zoom={10}
+            top={200}
+            bottom={-200}
+            left={200}
+            right={-200}
+          />
           {/* <OrthographicCamera
             makeDefault
             zoom={10}

@@ -27,6 +27,7 @@ export default function GlobeComponent({ mapData }) {
     () => parseMapData(mapData) || { type: "Map", maps: [] },
     [mapData]
   );
+  console.log(parsedMapData);
 
   useEffect(() => {
     let globe = new ThreeGlobe({
