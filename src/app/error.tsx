@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect } from "react";
 
 export default function ErrorFallback({
@@ -9,7 +8,6 @@ export default function ErrorFallback({
   error: Error & { digest?: string };
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
     console.error(error);
   }, [error]);
 
