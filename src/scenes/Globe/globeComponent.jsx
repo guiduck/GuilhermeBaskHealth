@@ -82,6 +82,11 @@ export default function GlobeComponent({ mapData }) {
     globeMaterial.emissiveIntensity = 0.1;
     globeMaterial.shininess = 0.7;
 
+    globe.position.set(-10, -35, -50);
+    globe.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI / 2.4);
+    globe.rotation.x = (Math.PI / 2);
+    globe.rotation.y = (-1*Math.PI / 2);
+
     globeRef.current = globe;
     setGlobeLoaded(true);
     // }, 1000);
@@ -89,9 +94,9 @@ export default function GlobeComponent({ mapData }) {
 
   useFrame(() => {
     if (globeRef.current) {
-      globeRef.current.rotation.z += 0.0005;
-      globeRef.current.rotation.y += 0.0005;
-      globeRef.current.rotation.x += 0.00025;
+      globeRef.current.rotation.z += 0.0002;
+      globeRef.current.rotation.y += 0.0002;
+      globeRef.current.rotation.x += 0.0002;
     }
   });
 

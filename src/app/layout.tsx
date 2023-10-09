@@ -36,7 +36,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system">
+        <ThemeProvider attribute="class" defaultTheme="light">
           <ToastContainer theme="dark" />
           <div className="relative w-full max-w-[100vw] !overflow-y-auto !overflow-x-hidden">
             {children}
