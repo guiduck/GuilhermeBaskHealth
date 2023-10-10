@@ -22,6 +22,7 @@ and deployed by [Vercel](https://vercel.com/)
 - [Api documentation](#api-documentation)
 - [Usage](#usage)
 - [Future Improvements](#future-improvements)
+- [Walkthrough](#walkthrough)
 
 ## Demo
 
@@ -163,6 +164,10 @@ While developing the dashboard, I am primarly focused on enhancing user experien
 - **Drag-and-Drop Widget Editing:** Introducing a user-friendly dashboard customization feature for intuitive widget arrangement.
 
 - **Fixed Map Orientation with User Interaction:** Creating an engaging map experience, inspired by Vercel's site, where users can drag and rotate while the map only spins in a fixed axis.
+
+## Walkthrough
+
+[baskHealthDashboard.webm](https://github.com/guiduck/GuilhermeBaskHealth/assets/6790300/32f3d576-dfca-4d67-9772-d445eb0be4e3)
 
 ## License
 
