@@ -14,7 +14,17 @@ const GlobeComponent = dynamic(() => import("./globeComponent"), {
 export default function GlobeScene({ mapData }: { mapData: LocationsType }) {
   const [domReady, setDomReady] = useState(false);
 
+  const controlsRef = React.useRef<any>();
+
   useEffect(() => {
+    const controls = controlsRef.current;
+    if (controls) {
+      // Set the camera's position at a fixed distance from the target
+      const distance = 200; // Adjust this distance as needed
+      controls.target.set(-10, -35, -50); // Set the target at the center of the globe
+      controls.object.position.set(0, 0, distance);
+      controls.update();
+    }
     setDomReady(true);
   }, []);
 
@@ -72,11 +82,12 @@ export default function GlobeScene({ mapData }: { mapData: LocationsType }) {
           <GlobeComponent mapData={mapData} />
           <fog attach="fog" args={["#5f002c", 300, 2000]} />
           <OrbitControls
+            ref={controlsRef}
             enableZoom
             enableDamping
             enablePan
             minDistance={100}
-            maxDistance={100}
+            maxDistance={200}
             rotateSpeed={0.5}
             zoomSpeed={1}
             autoRotate={false}

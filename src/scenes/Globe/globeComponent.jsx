@@ -35,7 +35,7 @@ export default function GlobeComponent({ mapData }) {
     });
     globe
       .hexPolygonsData(countries.features)
-      .hexPolygonResolution(4)
+      .hexPolygonResolution(3)
       .hexPolygonAltitude(0.01)
       .hexPolygonMargin(0.4)
       .showAtmosphere(true)
@@ -60,7 +60,7 @@ export default function GlobeComponent({ mapData }) {
       .arcsTransitionDuration(1000)
       .arcDashInitialGap((e) => e.order * 1)
       .labelsData(parsedMapData.maps)
-      .labelColor(() => "#ffc400")
+      .labelColor(() => "#ff7300")
 
       .labelDotRadius(0.9)
       .labelSize((e) => e.size)
