@@ -30,14 +30,16 @@ You can see a live demo of [BaskHealths dashboard here!](https://guilherme-bask-
 ## Project Structure
 
 - `src/app` code base for layout, pages;
+- `src/app/api` api routes used for authentication;
 - `src/lib` utils file;
-- `src/components` components isolated with their styling
-- `src/components/DashboardComponents` components made for the dashboard widget feature
-- `src/components/ui` components imported from shadcn
+- `src/middleware` middleware for authenticated paths;
+- `src/components` components isolated with their styling;
+- `src/components/DashboardComponents` components made for the dashboard widget feature;
+- `src/components/ui` components imported from shadcn;
 - `src/scenes/Globe` react three fiber scene exporting world map component;
-- `src/services` api call exported functions
-- `src/stores` zustand stores for widget use
-- `src/styles` global styles
+- `src/services` api call exported functions;
+- `src/stores` zustand stores for widget use;
+- `src/styles` global styles;
 
 ## Features
 
