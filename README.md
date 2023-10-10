@@ -167,7 +167,7 @@ While developing the dashboard, I am primarly focused on enhancing user experien
 
 ## Walkthrough
 
-[baskHealthDashboard.webm](https://github.com/guiduck/GuilhermeBaskHealth/assets/6790300/32f3d576-dfca-4d67-9772-d445eb0be4e3)
+To see the project follow the [youtube link!](https://youtu.be/cFlm-SRq4CM)
 
 ## License
 
